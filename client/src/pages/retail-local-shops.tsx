@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Check, MapPin, MessageCircle, ShoppingBag, Smartphone, Store, TrendingUp, Zap, Calendar } from "lucide-react";
+import { ArrowRight, Check, MapPin, MessageCircle, ShoppingBag, Smartphone, Store, TrendingUp, Zap, Calendar, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
@@ -332,6 +332,137 @@ export default function RetailLocalShops() {
                 className="relative z-10 rounded-3xl shadow-2xl border-4 border-white w-full object-cover h-[500px]"
               />
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Success Stories Section */}
+      <section className="py-24 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <div className="inline-block px-4 py-1.5 rounded-full bg-orange-100 text-orange-700 font-semibold text-sm mb-6">
+              Success Stories
+            </div>
+            <h2 className="text-4xl font-heading font-bold mb-4">Real Google Rankings, Real Success</h2>
+            <p className="text-muted-foreground text-lg">
+              Join 1,00,000+ merchants already ranking on Google's first page.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            <Card className="border border-gray-200 rounded-2xl hover:shadow-lg transition-shadow">
+              <CardContent className="p-8 space-y-6">
+                <div className="flex gap-1 text-orange-500">
+                  <Star className="w-5 h-5 fill-current" />
+                  <Star className="w-5 h-5 fill-current" />
+                  <Star className="w-5 h-5 fill-current" />
+                  <Star className="w-5 h-5 fill-current" />
+                  <Star className="w-5 h-5 fill-current" />
+                </div>
+                <p className="text-muted-foreground leading-relaxed">
+                  "Wanted to expand my ethnic kids clothing business to Singapore market. Vyaparify helped me achieve #1 ranking and now getting international orders!"
+                </p>
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center font-bold text-gray-600">
+                    K
+                  </div>
+                  <div>
+                    <h4 className="font-bold">Klingaru</h4>
+                    <p className="text-xs text-muted-foreground">Ethnic Clothes for Kids</p>
+                  </div>
+                </div>
+                <div className="bg-gray-50 rounded-xl p-4 space-y-2 text-sm">
+                  <div className="flex justify-between items-center">
+                    <span className="text-muted-foreground flex items-center gap-2">
+                      <TrendingUp className="w-4 h-4" /> Ranking
+                    </span>
+                    <span className="font-bold text-green-600">#1 Position</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-muted-foreground flex items-center gap-2">
+                      <MapPin className="w-4 h-4" /> Location
+                    </span>
+                    <span className="font-medium">Singapore International</span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="border border-gray-200 rounded-2xl hover:shadow-lg transition-shadow">
+              <CardContent className="p-8 space-y-6">
+                <div className="flex gap-1 text-orange-500">
+                  <Star className="w-5 h-5 fill-current" />
+                  <Star className="w-5 h-5 fill-current" />
+                  <Star className="w-5 h-5 fill-current" />
+                  <Star className="w-5 h-5 fill-current" />
+                  <Star className="w-5 h-5 fill-current" />
+                </div>
+                <p className="text-muted-foreground leading-relaxed">
+                  "Running AC repair services in Kanpur. Vyaparify helped me achieve #2 ranking for AC repair services and now getting steady customer inquiries!"
+                </p>
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center font-bold text-gray-600">
+                    S
+                  </div>
+                  <div>
+                    <h4 className="font-bold">Shivaay Enterprises</h4>
+                    <p className="text-xs text-muted-foreground">Multi-Service Business</p>
+                  </div>
+                </div>
+                <div className="bg-gray-50 rounded-xl p-4 space-y-2 text-sm">
+                  <div className="flex justify-between items-center">
+                    <span className="text-muted-foreground flex items-center gap-2">
+                      <TrendingUp className="w-4 h-4" /> Ranking
+                    </span>
+                    <span className="font-bold text-green-600">#2 Position</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-muted-foreground flex items-center gap-2">
+                      <MapPin className="w-4 h-4" /> Location
+                    </span>
+                    <span className="font-medium">Kanpur, UP</span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="border border-gray-200 rounded-2xl hover:shadow-lg transition-shadow">
+              <CardContent className="p-8 space-y-6">
+                <div className="flex gap-1 text-orange-500">
+                  <Star className="w-5 h-5 fill-current" />
+                  <Star className="w-5 h-5 fill-current" />
+                  <Star className="w-5 h-5 fill-current" />
+                  <Star className="w-5 h-5 fill-current" />
+                  <Star className="w-5 h-5 fill-current" />
+                </div>
+                <p className="text-muted-foreground leading-relaxed">
+                  "Specializing in formal wear for women in Ankleshwar. Vyaparify helped me reach #3 ranking and now getting customers from across Gujarat!"
+                </p>
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center font-bold text-gray-600">
+                    V
+                  </div>
+                  <div>
+                    <h4 className="font-bold">Vanati</h4>
+                    <p className="text-xs text-muted-foreground">Women's Formal Wear</p>
+                  </div>
+                </div>
+                <div className="bg-gray-50 rounded-xl p-4 space-y-2 text-sm">
+                  <div className="flex justify-between items-center">
+                    <span className="text-muted-foreground flex items-center gap-2">
+                      <TrendingUp className="w-4 h-4" /> Ranking
+                    </span>
+                    <span className="font-bold text-green-600">#3 Position</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-muted-foreground flex items-center gap-2">
+                      <MapPin className="w-4 h-4" /> Location
+                    </span>
+                    <span className="font-medium">Ankleshwar, Gujarat</span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
