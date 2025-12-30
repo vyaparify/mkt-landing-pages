@@ -269,7 +269,7 @@ export default function RetailLocalShops() {
               <ul className="space-y-4">
                 {[
                   "No technical knowledge needed",
-                  "Works just like WhatsApp",
+                  "One Simple Platform",
                   "Set up your catalog in minutes",
                   "Receive orders instantly on your phone"
                 ].map((item, i) => (
