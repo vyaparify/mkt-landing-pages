@@ -667,8 +667,7 @@ export default function RetailLocalShops() {
               <div className="text-center mb-2">
                 <span className="text-5xl lg:text-6xl font-bold">₹7,999</span>
               </div>
-              <p className="text-center text-muted-foreground line-through mb-8">₹28,000 / year</p>
-              
+                            
               <a href="/checkout" className="block">
                 <Button className="w-full h-14 text-lg font-bold rounded-xl bg-primary hover:bg-primary/90 shadow-lg">
                   GET STARTED
