@@ -13,6 +13,12 @@ import logo from "@assets/logo.svg";
 import caseStudyAI from "@assets/Screenshot_2025-12-30_at_6.33.47_PM_1767099854878.png";
 import caseStudyGoogle from "@assets/Screenshot_2025-12-30_at_6.33.55_PM_1767099854890.png";
 import caseStudyDashboard from "@assets/Screenshot_2025-12-30_at_6.34.03_PM_1767099854890.png";
+import avatar1 from "@assets/generated_images/indian_businessman_portrait_headshot.png";
+import avatar2 from "@assets/generated_images/indian_woman_entrepreneur_headshot.png";
+import avatar3 from "@assets/generated_images/indian_shopkeeper_man_headshot.png";
+import avatar4 from "@assets/generated_images/young_indian_businessman_headshot.png";
+
+const avatars = [avatar1, avatar2, avatar3, avatar4];
 
 const fadeIn = {
   initial: { opacity: 0, y: 20 },
@@ -146,8 +152,8 @@ export default function RetailLocalShops() {
               
               <motion.div variants={fadeIn} className="mt-10 flex items-center gap-4 text-sm text-muted-foreground">
                 <div className="flex -space-x-2">
-                  {[1,2,3,4].map(i => (
-                    <div key={i} className="w-8 h-8 rounded-full border-2 border-background bg-gray-200" />
+                  {avatars.map((avatar, i) => (
+                    <img key={i} src={avatar} alt={`Customer ${i + 1}`} className="w-8 h-8 rounded-full border-2 border-background object-cover" />
                   ))}
                 </div>
                 <p>Join other shop owners in your area</p>
