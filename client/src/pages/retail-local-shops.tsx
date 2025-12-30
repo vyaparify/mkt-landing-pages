@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 
 // Assets
-import heroImage from "@assets/generated_images/shop_owner_using_smartphone_in_retail_store.png";
+import heroImage from "@assets/generated_images/indian_shop_owner_businessman_using_smartphone.png";
 import mapImage from "@assets/ChatGPT_Image_Dec_30,_2025,_02_36_07_PM_1767087384759.png";
 import dashboardImage from "@assets/screencapture-id-vyaparify-admin-beta-dashboard-2025-12-11-14__1767084671886.png";
 import logo from "@assets/logo.svg";
