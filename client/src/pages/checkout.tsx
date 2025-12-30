@@ -3,29 +3,42 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { motion } from "framer-motion";
-import { Check, CreditCard, Loader2, Lock, ShieldCheck, Smartphone } from "lucide-react";
+import { Check, Loader2, Lock, ShieldCheck, ShoppingCart, Info, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Separator } from "@/components/ui/separator";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useToast } from "@/hooks/use-toast";
+import logo from "@assets/logo.svg";
 
-// Schema for form validation
+declare global {
+  interface Window {
+    Razorpay: any;
+  }
+}
+
 const formSchema = z.object({
   fullName: z.string().min(2, "Name must be at least 2 characters"),
   email: z.string().email("Invalid email address"),
   phone: z.string().min(10, "Phone number must be at least 10 digits"),
-  businessName: z.string().min(2, "Business name is required"),
-  paymentMethod: z.enum(["upi", "card"]),
 });
+
+const planFeatures = [
+  "AI Talking Website (24/7 Sales)",
+  "Higher Google Rankings",
+  "Complete Lead Management Dashboard",
+  "Free Vyaparify Domain & Hosting Included",
+];
+
+const originalPrice = 28000;
+const discountedPrice = 7999;
+const savings = originalPrice - discountedPrice;
 
 export default function Checkout() {
   const { toast } = useToast();
   const [isProcessing, setIsProcessing] = useState(false);
-  const [step, setStep] = useState(1);
+  const [paymentSuccess, setPaymentSuccess] = useState(false);
+  const [transactionId, setTransactionId] = useState("");
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -33,27 +46,115 @@ export default function Checkout() {
       fullName: "",
       email: "",
       phone: "",
-      businessName: "",
-      paymentMethod: "upi",
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  const loadRazorpayScript = (): Promise<boolean> => {
+    return new Promise((resolve) => {
+      if (window.Razorpay) {
+        resolve(true);
+        return;
+      }
+      const script = document.createElement("script");
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
+      document.body.appendChild(script);
+    });
+  };
+
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsProcessing(true);
-    // Simulate API call
-    setTimeout(() => {
-      setIsProcessing(false);
-      setStep(2); // Move to success state
-      toast({
-        title: "Order Placed Successfully!",
-        description: "Welcome to Vyaparify. Check your email for next steps.",
+
+    try {
+      const scriptLoaded = await loadRazorpayScript();
+      if (!scriptLoaded) {
+        throw new Error("Failed to load payment gateway");
+      }
+
+      const response = await fetch("/api/razorpay/create-order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          amount: discountedPrice,
+          customerInfo: values,
+        }),
       });
-    }, 2000);
+
+      if (!response.ok) {
+        throw new Error("Failed to create order");
+      }
+
+      const order = await response.json();
+
+      const options = {
+        key: order.keyId,
+        amount: order.amount,
+        currency: order.currency,
+        name: "Vyaparify",
+        description: "Vyaparify Premium - Annual Subscription",
+        order_id: order.id,
+        prefill: {
+          name: values.fullName,
+          email: values.email,
+          contact: values.phone,
+        },
+        theme: {
+          color: "#F97316",
+        },
+        handler: async function (response: any) {
+          try {
+            const verifyRes = await fetch("/api/razorpay/verify-payment", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                razorpay_order_id: response.razorpay_order_id,
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_signature: response.razorpay_signature,
+              }),
+            });
+
+            if (verifyRes.ok) {
+              setTransactionId(response.razorpay_payment_id);
+              setPaymentSuccess(true);
+              toast({
+                title: "Payment Successful!",
+                description: "Your subscription is now active.",
+              });
+            } else {
+              throw new Error("Payment verification failed");
+            }
+          } catch (error) {
+            toast({
+              title: "Payment verification failed",
+              description: "Please contact support if amount was deducted.",
+              variant: "destructive",
+            });
+          }
+          setIsProcessing(false);
+        },
+        modal: {
+          ondismiss: function () {
+            setIsProcessing(false);
+          },
+        },
+      };
+
+      const razorpay = new window.Razorpay(options);
+      razorpay.open();
+    } catch (error) {
+      toast({
+        title: "Payment failed",
+        description: "Something went wrong. Please try again.",
+        variant: "destructive",
+      });
+      setIsProcessing(false);
+    }
   }
 
-  if (step === 2) {
+  if (paymentSuccess) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-green-50 flex items-center justify-center p-4">
         <motion.div 
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -64,20 +165,20 @@ export default function Checkout() {
           </div>
           <h2 className="text-2xl font-bold mb-2">Payment Successful!</h2>
           <p className="text-muted-foreground mb-8">
-            Thank you for choosing Vyaparify. Your account has been created successfully.
+            Thank you for choosing Vyaparify. Your subscription is now active. Check your email for login details.
           </p>
           <div className="bg-secondary/50 p-4 rounded-xl mb-8 text-left text-sm">
             <div className="flex justify-between mb-2">
               <span className="text-muted-foreground">Amount Paid</span>
-              <span className="font-bold">₹2,499.00</span>
+              <span className="font-bold">₹{discountedPrice.toLocaleString()}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-muted-foreground">Transaction ID</span>
-              <span className="font-mono">VYAP-{Math.floor(Math.random() * 100000)}</span>
+              <span className="font-mono text-xs">{transactionId}</span>
             </div>
           </div>
-          <Button className="w-full bg-primary hover:bg-primary/90" onClick={() => window.location.href = "/"}>
-            Go to Dashboard
+          <Button className="w-full bg-primary hover:bg-primary/90" onClick={() => window.location.href = "/retail-local-shops"}>
+            Go Back to Home
           </Button>
         </motion.div>
       </div>
@@ -85,247 +186,190 @@ export default function Checkout() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 font-sans">
-      {/* Header */}
+    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-orange-50 font-sans">
       <header className="bg-white border-b border-gray-200 sticky top-0 z-10">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <img src="/attached_assets/logo.svg" alt="Vyaparify" className="h-8 w-auto" />
-          </div>
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <Lock className="w-4 h-4" />
-            <span className="hidden sm:inline">Secure Checkout</span>
-          </div>
+          <a href="/retail-local-shops" className="flex items-center gap-2">
+            <img src={logo} alt="Vyaparify" className="h-8 w-auto" />
+          </a>
+          <a href="/retail-local-shops" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
+            <ArrowLeft className="w-4 h-4" />
+            <span className="hidden sm:inline">Back to Home</span>
+          </a>
         </div>
       </header>
 
       <main className="container mx-auto px-4 py-8 lg:py-12">
-        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 max-w-6xl mx-auto">
-          {/* Left Column: Form */}
-          <div className="lg:col-span-7 space-y-8">
-            <div>
-              <h1 className="text-2xl font-bold mb-2">Complete your purchase</h1>
-              <p className="text-muted-foreground">Enter your details to get started with Vyaparify.</p>
-            </div>
+        <div className="grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="order-2 lg:order-1"
+          >
+            <Card className="overflow-hidden">
+              <div className="bg-gradient-to-r from-primary to-orange-500 h-2" />
+              <CardHeader>
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
+                    <ShoppingCart className="w-6 h-6 text-primary" />
+                  </div>
+                  <CardTitle className="text-2xl">Order Summary</CardTitle>
+                </div>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div className="flex justify-between items-start pb-6 border-b">
+                  <div>
+                    <h3 className="font-bold text-xl">Vyaparify Premium</h3>
+                    <p className="text-muted-foreground">Annual Subscription Plan</p>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-muted-foreground line-through">₹{originalPrice.toLocaleString()}</p>
+                    <p className="text-3xl font-bold text-primary">₹{discountedPrice.toLocaleString()}</p>
+                  </div>
+                </div>
 
-            <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="text-lg flex items-center gap-2">
-                      <span className="bg-primary/10 text-primary w-6 h-6 rounded-full flex items-center justify-center text-sm">1</span>
-                      Personal Details
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div className="grid sm:grid-cols-2 gap-4">
-                      <FormField
-                        control={form.control}
-                        name="fullName"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Full Name</FormLabel>
-                            <FormControl>
-                              <Input placeholder="John Doe" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                      <FormField
-                        control={form.control}
-                        name="phone"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Phone Number</FormLabel>
-                            <FormControl>
-                              <Input placeholder="+91 98765 43210" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
+                <div className="space-y-4">
+                  {planFeatures.map((feature, i) => (
+                    <div key={i} className="flex items-center gap-3">
+                      <div className="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center">
+                        <Check className="w-4 h-4 text-green-600" />
+                      </div>
+                      <span>{feature}</span>
                     </div>
+                  ))}
+                </div>
+
+                <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
+                  <div className="flex gap-3">
+                    <Info className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
+                    <p className="text-blue-800 text-sm">
+                      Your subscription will automatically activate immediately after payment. You'll receive login details via email/SMS.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="pt-6 border-t">
+                  <div className="flex justify-between items-center">
+                    <span className="text-xl font-bold">Total Amount</span>
+                    <span className="text-3xl font-bold text-primary">₹{discountedPrice.toLocaleString()}</span>
+                  </div>
+                </div>
+              </CardContent>
+              <CardFooter className="bg-gradient-to-r from-orange-100 to-yellow-100 p-4">
+                <p className="w-full text-center font-bold text-orange-800">
+                  🎉 YOU ARE SAVING ₹{savings.toLocaleString()} TODAY!
+                </p>
+              </CardFooter>
+            </Card>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="order-1 lg:order-2"
+          >
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Lock className="w-5 h-5 text-primary" />
+                  Your Details
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <Form {...form}>
+                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                    <FormField
+                      control={form.control}
+                      name="fullName"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Full Name *</FormLabel>
+                          <FormControl>
+                            <Input 
+                              placeholder="Enter your name" 
+                              {...field} 
+                              className="h-12"
+                              data-testid="input-name"
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    
                     <FormField
                       control={form.control}
                       name="email"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Email Address</FormLabel>
+                          <FormLabel>Email Address *</FormLabel>
                           <FormControl>
-                            <Input placeholder="john@example.com" {...field} />
+                            <Input 
+                              placeholder="Enter your email" 
+                              type="email"
+                              {...field} 
+                              className="h-12"
+                              data-testid="input-email"
+                            />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
                       )}
                     />
+                    
                     <FormField
                       control={form.control}
-                      name="businessName"
+                      name="phone"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Business Name</FormLabel>
+                          <FormLabel>Phone Number *</FormLabel>
                           <FormControl>
-                            <Input placeholder="My Awesome Shop" {...field} />
+                            <Input 
+                              placeholder="Enter your phone number" 
+                              type="tel"
+                              {...field} 
+                              className="h-12"
+                              data-testid="input-phone"
+                            />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
                       )}
                     />
-                  </CardContent>
-                </Card>
 
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="text-lg flex items-center gap-2">
-                      <span className="bg-primary/10 text-primary w-6 h-6 rounded-full flex items-center justify-center text-sm">2</span>
-                      Payment Method
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <FormField
-                      control={form.control}
-                      name="paymentMethod"
-                      render={({ field }) => (
-                        <FormItem className="space-y-3">
-                          <FormControl>
-                            <RadioGroup
-                              onValueChange={field.onChange}
-                              defaultValue={field.value}
-                              className="flex flex-col space-y-1"
-                            >
-                              <FormItem className="flex items-center space-x-3 space-y-0 rounded-xl border p-4 hover:bg-secondary/20 cursor-pointer has-[[data-state=checked]]:border-primary has-[[data-state=checked]]:bg-primary/5 transition-all">
-                                <FormControl>
-                                  <RadioGroupItem value="upi" />
-                                </FormControl>
-                                <div className="flex-1 flex items-center justify-between">
-                                  <FormLabel className="font-normal cursor-pointer flex items-center gap-2">
-                                    <Smartphone className="w-4 h-4 text-muted-foreground" />
-                                    UPI / QR Code
-                                  </FormLabel>
-                                  <div className="flex gap-1">
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/UPI-Logo-vector.svg" alt="UPI" className="h-4 opacity-70" />
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Google_Pay_Logo.svg" alt="GPay" className="h-4 opacity-70" />
-                                  </div>
-                                </div>
-                              </FormItem>
-                              <FormItem className="flex items-center space-x-3 space-y-0 rounded-xl border p-4 hover:bg-secondary/20 cursor-pointer has-[[data-state=checked]]:border-primary has-[[data-state=checked]]:bg-primary/5 transition-all">
-                                <FormControl>
-                                  <RadioGroupItem value="card" />
-                                </FormControl>
-                                <div className="flex-1 flex items-center justify-between">
-                                  <FormLabel className="font-normal cursor-pointer flex items-center gap-2">
-                                    <CreditCard className="w-4 h-4 text-muted-foreground" />
-                                    Credit / Debit Card
-                                  </FormLabel>
-                                  <div className="flex gap-2">
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Visa.svg" alt="Visa" className="h-3 opacity-70" />
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" className="h-3 opacity-70" />
-                                  </div>
-                                </div>
-                              </FormItem>
-                            </RadioGroup>
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
+                    <Button 
+                      type="submit" 
+                      className="w-full h-14 text-lg font-bold bg-primary hover:bg-primary/90 shadow-lg shadow-primary/25 rounded-xl" 
+                      disabled={isProcessing}
+                      data-testid="button-pay-now"
+                    >
+                      {isProcessing ? (
+                        <>
+                          <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                          Processing...
+                        </>
+                      ) : (
+                        <>Pay ₹{discountedPrice.toLocaleString()} Securely</>
                       )}
-                    />
-                  </CardContent>
-                </Card>
+                    </Button>
+                    
+                    <div className="flex items-center justify-center gap-2 text-muted-foreground text-sm">
+                      <ShieldCheck className="w-4 h-4" />
+                      <span>Secured by Razorpay • 100% Safe Payment</span>
+                    </div>
 
-                <Button type="submit" className="w-full h-12 text-lg font-bold bg-primary hover:bg-primary/90 shadow-lg shadow-primary/20" disabled={isProcessing}>
-                  {isProcessing ? (
-                    <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Processing...
-                    </>
-                  ) : (
-                    "Pay ₹2,499 & Get Started"
-                  )}
-                </Button>
-                
-                <p className="text-center text-xs text-muted-foreground flex items-center justify-center gap-1">
-                  <ShieldCheck className="w-3 h-3" />
-                  Payments are 100% secure and encrypted
-                </p>
-              </form>
-            </Form>
-          </div>
-
-          {/* Right Column: Order Summary */}
-          <div className="lg:col-span-5">
-            <div className="lg:sticky lg:top-24">
-              <Card className="bg-gray-50/50 border-2">
-                <CardHeader>
-                  <CardTitle>Order Summary</CardTitle>
-                  <CardDescription>Review your plan details</CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  <div className="flex gap-4">
-                    <div className="w-16 h-16 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
-                      <Store className="w-8 h-8" /> {/* Using Store icon as fallback if Image is not imported yet, but I'll import it */}
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-lg">Vyaparify Premium</h3>
-                      <p className="text-sm text-muted-foreground">Annual Plan</p>
-                    </div>
-                  </div>
-
-                  <div className="space-y-3">
-                    <div className="flex items-center gap-2 text-sm">
-                      <Check className="w-4 h-4 text-green-600" />
-                      <span>Custom Domain Name</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-sm">
-                      <Check className="w-4 h-4 text-green-600" />
-                      <span>Unlimited Products</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-sm">
-                      <Check className="w-4 h-4 text-green-600" />
-                      <span>0% Commission</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-sm">
-                      <Check className="w-4 h-4 text-green-600" />
-                      <span>WhatsApp Integration</span>
-                    </div>
-                  </div>
-
-                  <Separator />
-
-                  <div className="space-y-2">
-                    <div className="flex justify-between text-sm">
-                      <span className="text-muted-foreground">Subtotal</span>
-                      <span>₹4,999.00</span>
-                    </div>
-                    <div className="flex justify-between text-sm text-green-600">
-                      <span>Discount (50% OFF)</span>
-                      <span>-₹2,500.00</span>
-                    </div>
-                    <Separator className="my-2" />
-                    <div className="flex justify-between items-center">
-                      <span className="font-bold text-lg">Total</span>
-                      <span className="font-bold text-2xl text-primary">₹2,499.00</span>
-                    </div>
-                  </div>
-                </CardContent>
-                <CardFooter className="bg-secondary/30 border-t p-4 rounded-b-xl">
-                  <p className="text-xs text-muted-foreground leading-relaxed text-center w-full">
-                    By confirming your payment, you agree to our Terms of Service and Privacy Policy. 30-day money-back guarantee.
-                  </p>
-                </CardFooter>
-              </Card>
-
-              {/* Trust Badges */}
-              <div className="mt-6 grid grid-cols-3 gap-4 grayscale opacity-60">
-                {/* Placeholders for trust badges if needed, currently just text/icon mockup */}
-              </div>
-            </div>
-          </div>
+                    <p className="text-center text-xs text-muted-foreground pt-4 border-t">
+                      By proceeding, you agree to our Terms of Service and Privacy Policy. 
+                      Your payment is processed securely through Razorpay.
+                    </p>
+                  </form>
+                </Form>
+              </CardContent>
+            </Card>
+          </motion.div>
         </div>
       </main>
     </div>
   );
 }
-
-// Import Store icon which I used in the component
-import { Store } from "lucide-react";
