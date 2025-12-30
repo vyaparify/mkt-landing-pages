@@ -7,7 +7,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 // Assets
 import heroImage from "@assets/generated_images/shop_owner_using_smartphone_in_retail_store.png";
 import mapImage from "@assets/generated_images/local_customers_map_concept_3d_render.png";
-import mobileImage from "@assets/generated_images/simple_mobile_interface_for_accepting_orders.png";
+import dashboardImage from "/attached_assets/screencapture-id-vyaparify-admin-beta-dashboard-2025-12-11-14__1767084671886.png";
 
 const fadeIn = {
   initial: { opacity: 0, y: 20 },
@@ -251,9 +251,9 @@ export default function RetailLocalShops() {
             <div className="order-2 lg:order-1 relative">
               <div className="absolute inset-0 bg-blue-100 rounded-full blur-3xl opacity-50 transform scale-90" />
               <img 
-                src={mobileImage} 
-                alt="Simple mobile interface" 
-                className="relative z-10 rounded-[2.5rem] shadow-2xl border-8 border-white mx-auto max-w-sm w-full"
+                src={dashboardImage} 
+                alt="Vyaparify Dashboard Interface" 
+                className="relative z-10 rounded-xl shadow-2xl border-4 border-white mx-auto w-full"
               />
             </div>
             
