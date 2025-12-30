@@ -39,9 +39,11 @@ export default function RetailLocalShops() {
           </div>
 
           <div className="flex items-center gap-4">
-            <Button className="bg-primary hover:bg-primary/90 text-white shadow-lg shadow-primary/20 rounded-full px-6">
-              Buy Now
-            </Button>
+            <a href="/checkout">
+              <Button className="bg-primary hover:bg-primary/90 text-white shadow-lg shadow-primary/20 rounded-full px-6">
+                Buy Now
+              </Button>
+            </a>
           </div>
         </div>
       </nav>
