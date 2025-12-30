@@ -35,6 +35,9 @@ export default function RetailLocalShops() {
         {showBanner && (
           <div className="bg-orange-600 text-white px-4 py-2 text-center text-sm font-medium flex items-center justify-center gap-2 relative">
             <span>🎉 Limited Time Offer: Get <span className="font-bold text-yellow-300">20% OFF</span> your subscription when you start today!</span>
+            <a href="/checkout" className="underline font-bold hover:text-yellow-300 ml-2">
+              Buy Now
+            </a>
             <Button 
               variant="ghost" 
               size="icon" 
@@ -60,11 +63,7 @@ export default function RetailLocalShops() {
             </div>
 
             <div className="flex items-center gap-4">
-              <a href="/checkout">
-                <Button className="bg-primary hover:bg-primary/90 text-white shadow-lg shadow-primary/20 rounded-full px-6">
-                  Buy Now
-                </Button>
-              </a>
+              {/* Buy Now button removed from header */}
             </div>
           </div>
         </nav>
