@@ -82,7 +82,6 @@ export default function ThankYou() {
             <ul className="text-blue-800 text-sm space-y-2">
               <li>• Check your email for login credentials</li>
               <li>• Our team will contact you within 24 hours for onboarding</li>
-              <li>• Your AI website will be ready in 48 hours</li>
             </ul>
           </motion.div>
 
