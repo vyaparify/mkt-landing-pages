@@ -8,6 +8,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import heroImage from "@assets/generated_images/shop_owner_using_smartphone_in_retail_store.png";
 import mapImage from "@assets/generated_images/local_customers_map_concept_3d_render.png";
 import dashboardImage from "@assets/screencapture-id-vyaparify-admin-beta-dashboard-2025-12-11-14__1767084671886.png";
+import logo from "@assets/logo.svg";
 
 const fadeIn = {
   initial: { opacity: 0, y: 20 },
@@ -30,7 +31,7 @@ export default function RetailLocalShops() {
       <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/40">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <img src="/attached_assets/logo.svg" alt="Vyaparify" className="h-8 w-auto" />
+            <img src={logo} alt="Vyaparify" className="h-8 w-auto" />
           </div>
           
           <div className="hidden md:flex items-center gap-8">
@@ -532,7 +533,7 @@ export default function RetailLocalShops() {
           <div className="grid md:grid-cols-4 gap-8 mb-12">
             <div className="col-span-1 md:col-span-2">
               <div className="flex items-center gap-2 mb-4">
-                <img src="/attached_assets/logo.svg" alt="Vyaparify" className="h-8 w-auto" />
+                <img src={logo} alt="Vyaparify" className="h-8 w-auto" />
               </div>
               <p className="text-muted-foreground max-w-xs">
                 Empowering local businesses with simple, effective tools to sell online and grow locally.
