@@ -5,9 +5,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 
 // Assets
-import heroImage from "@assets/Screenshot_2025-12-30_at_2.14.03_PM_1767084258841.png";
+import heroImage from "@assets/generated_images/shop_owner_using_smartphone_in_retail_store.png";
 import mapImage from "@assets/generated_images/local_customers_map_concept_3d_render.png";
-import mobileImage from "@assets/Screenshot_2025-12-30_at_2.14.26_PM_1767084280855.png";
+import mobileImage from "@assets/generated_images/simple_mobile_interface_for_accepting_orders.png";
 
 const fadeIn = {
   initial: { opacity: 0, y: 20 },
