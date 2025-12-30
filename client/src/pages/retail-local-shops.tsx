@@ -318,7 +318,7 @@ export default function RetailLocalShops() {
                   </div>
                   <div>
                     <h4 className="font-bold text-lg mb-1">Local Visibility</h4>
-                    <p className="text-sm text-muted-foreground">Real people near you, not empty internet traffic.</p>
+                    <p className="text-sm text-muted-foreground">Higher Google Search Ranking in your area</p>
                   </div>
                 </div>
               </div>
