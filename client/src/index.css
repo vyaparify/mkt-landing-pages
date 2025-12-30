@@ -9,59 +9,60 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
   
-  /* Brand Colors */
-  --color-brand-green: hsl(150 100% 28%); /* Deep Trustworthy Green */
-  --color-brand-light-green: hsl(146 68% 55%); /* Bright Action Green */
-  --color-brand-orange: hsl(25 95% 53%); /* Warm Action Orange */
-  --color-brand-cream: hsl(40 50% 98%); /* Warm Background */
+  /* Vyaparify Theme Colors - Professional Blue & Trust */
+  --color-brand-blue: hsl(220 65% 38%); /* Deep Professional Blue */
+  --color-brand-blue-light: hsl(217 91% 60%); /* Vibrant Tech Blue */
+  --color-brand-gold: hsl(45 93% 47%); /* Success/Premium Gold */
+  --color-brand-bg: hsl(210 40% 98%); /* Cool Grey Background */
+  --color-brand-dark: hsl(222 47% 11%); /* Deep Navy Text */
 
-  --color-background: var(--color-brand-cream);
-  --color-foreground: hsl(222 47% 11%); /* Dark Navy for Text */
+  --color-background: var(--color-brand-bg);
+  --color-foreground: var(--color-brand-dark);
 
   --color-card: hsl(0 0% 100%);
-  --color-card-foreground: hsl(222 47% 11%);
+  --color-card-foreground: var(--color-brand-dark);
   
   --color-popover: hsl(0 0% 100%);
-  --color-popover-foreground: hsl(222 47% 11%);
+  --color-popover-foreground: var(--color-brand-dark);
   
-  --color-primary: var(--color-brand-green);
+  --color-primary: var(--color-brand-blue);
   --color-primary-foreground: hsl(0 0% 100%);
   
-  --color-secondary: hsl(146 68% 95%); /* Very light green for backgrounds */
-  --color-secondary-foreground: var(--color-brand-green);
+  --color-secondary: hsl(210 40% 96.1%);
+  --color-secondary-foreground: var(--color-brand-blue);
   
-  --color-muted: hsl(210 40% 96.1%);
-  --color-muted-foreground: hsl(215.4 16.3% 46.9%);
+  --color-muted: hsl(210 40% 90%);
+  --color-muted-foreground: hsl(215 20% 45%);
   
-  --color-accent: var(--color-brand-orange);
+  --color-accent: var(--color-brand-gold);
   --color-accent-foreground: hsl(0 0% 100%);
   
   --color-destructive: hsl(0 84.2% 60.2%);
   --color-destructive-foreground: hsl(210 40% 98%);
   
-  --color-border: hsl(214.3 31.8% 91.4%);
-  --color-input: hsl(214.3 31.8% 91.4%);
-  --color-ring: var(--color-brand-green);
+  --color-border: hsl(214.3 31.8% 90%);
+  --color-input: hsl(214.3 31.8% 90%);
+  --color-ring: var(--color-brand-blue-light);
   
-  --color-chart-1: hsl(12 76% 61%);
-  --color-chart-2: hsl(173 58% 39%);
+  --color-chart-1: var(--color-brand-blue);
+  --color-chart-2: var(--color-brand-gold);
   --color-chart-3: hsl(197 37% 24%);
   --color-chart-4: hsl(43 74% 66%);
   --color-chart-5: hsl(27 87% 67%);
   
-  --color-sidebar: hsl(0 0% 98%);
-  --color-sidebar-foreground: hsl(240 5.3% 26.1%);
-  --color-sidebar-primary: hsl(240 5.9% 10%);
-  --color-sidebar-primary-foreground: hsl(0 0% 98%);
-  --color-sidebar-accent: hsl(240 4.8% 95.9%);
-  --color-sidebar-accent-foreground: hsl(240 5.9% 10%);
+  --color-sidebar: hsl(0 0% 100%);
+  --color-sidebar-foreground: var(--color-brand-dark);
+  --color-sidebar-primary: var(--color-brand-blue);
+  --color-sidebar-primary-foreground: hsl(0 0% 100%);
+  --color-sidebar-accent: hsl(210 40% 96.1%);
+  --color-sidebar-accent-foreground: var(--color-brand-blue);
   --color-sidebar-border: hsl(220 13% 91%);
-  --color-sidebar-ring: hsl(217.2 91.2% 59.8%);
+  --color-sidebar-ring: var(--color-brand-blue-light);
   
   --font-sans: "Inter", sans-serif;
-  --font-heading: "Plus Jakarta Sans", sans-serif;
+  --font-heading: "Outfit", sans-serif;
 
-  --radius: 0.75rem;
+  --radius: 0.5rem; /* Sharper radius for professional look */
 }
 
 @layer base {
