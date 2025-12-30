@@ -10,9 +10,9 @@ import heroImage from "@assets/generated_images/indian_shop_owner_businessman_us
 import mapImage from "@assets/ChatGPT_Image_Dec_30,_2025,_02_36_07_PM_1767087384759.png";
 import dashboardImage from "@assets/screencapture-id-vyaparify-admin-beta-dashboard-2025-12-11-14__1767084671886.png";
 import logo from "@assets/logo.svg";
-import caseStudyAI from "@assets/generated_images/ai-powered_e-commerce_website_mockup.png";
-import caseStudyGoogle from "@assets/generated_images/google_first_page_ranking_success.png";
-import caseStudyDashboard from "@assets/generated_images/dashboard_and_lead_management_interface.png";
+import caseStudyAI from "@assets/Screenshot_2025-12-30_at_6.33.47_PM_1767099854878.png";
+import caseStudyGoogle from "@assets/Screenshot_2025-12-30_at_6.33.55_PM_1767099854890.png";
+import caseStudyDashboard from "@assets/Screenshot_2025-12-30_at_6.34.03_PM_1767099854890.png";
 
 const fadeIn = {
   initial: { opacity: 0, y: 20 },
