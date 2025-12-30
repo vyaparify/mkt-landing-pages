@@ -120,13 +120,13 @@ export default function PaymentFailed() {
               If amount was deducted, contact us immediately
             </p>
             <div className="flex items-center justify-center gap-6 text-sm">
-              <a href="mailto:hello@vyaparify.com" className="flex items-center gap-2 text-primary hover:underline">
+              <a href="mailto:support@vyaparify.com" className="flex items-center gap-2 text-primary hover:underline">
                 <Mail className="w-4 h-4" />
-                hello@vyaparify.com
+                support@vyaparify.com
               </a>
-              <a href="tel:+919876543210" className="flex items-center gap-2 text-primary hover:underline">
+              <a href="tel:+918818881628" className="flex items-center gap-2 text-primary hover:underline">
                 <Phone className="w-4 h-4" />
-                +91 98765 43210
+                +91 88188 81628
               </a>
             </div>
           </motion.div>
