@@ -3,9 +3,7 @@ import { ArrowRight, Check, MapPin, MessageCircle, ShoppingBag, Smartphone, Stor
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import Booker from "@/components/Booker";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // Assets
 import heroImage from "@assets/generated_images/indian_shop_owner_businessman_using_smartphone.png";
@@ -27,8 +25,39 @@ const stagger = {
   }
 };
 
+declare global {
+  interface Window {
+    Calendly?: {
+      initPopupWidget: (options: { url: string }) => void;
+    };
+  }
+}
+
 export default function RetailLocalShops() {
   const [showBanner, setShowBanner] = useState(true);
+
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://assets.calendly.com/assets/external/widget.js';
+    script.async = true;
+    document.head.appendChild(script);
+
+    const link = document.createElement('link');
+    link.href = 'https://assets.calendly.com/assets/external/widget.css';
+    link.rel = 'stylesheet';
+    document.head.appendChild(link);
+
+    return () => {
+      document.head.removeChild(script);
+      document.head.removeChild(link);
+    };
+  }, []);
+
+  const openCalendly = () => {
+    if (window.Calendly) {
+      window.Calendly.initPopupWidget({ url: 'https://calendly.com/hello-vyaparify/new-meeting' });
+    }
+  };
 
   return (
     <div className="min-h-screen bg-background font-sans overflow-x-hidden">
@@ -99,17 +128,15 @@ export default function RetailLocalShops() {
                   Create Shop in 2 Mins
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
-                <Dialog>
-                  <DialogTrigger asChild>
-                    <Button size="lg" variant="outline" className="h-14 px-8 text-lg rounded-full border-2 hover:bg-secondary/50">
-                      <Calendar className="mr-2 w-5 h-5 text-green-600" />
-                      Book a Demo
-                    </Button>
-                  </DialogTrigger>
-                  <DialogContent className="sm:max-w-[800px] h-[80vh] p-0 overflow-hidden">
-                     <Booker />
-                  </DialogContent>
-                </Dialog>
+                <Button 
+                  size="lg" 
+                  variant="outline" 
+                  className="h-14 px-8 text-lg rounded-full border-2 hover:bg-secondary/50"
+                  onClick={openCalendly}
+                >
+                  <Calendar className="mr-2 w-5 h-5 text-green-600" />
+                  Book a Demo
+                </Button>
               </motion.div>
               
               <motion.div variants={fadeIn} className="mt-10 flex items-center gap-4 text-sm text-muted-foreground">
