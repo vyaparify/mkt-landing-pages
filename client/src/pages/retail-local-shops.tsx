@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Check, MapPin, MessageCircle, ShoppingBag, Smartphone, Store, TrendingUp, Zap, Calendar, Star, X } from "lucide-react";
+import { ArrowRight, Check, MapPin, MessageCircle, ShoppingBag, Smartphone, Store, TrendingUp, Zap, Calendar, Star, X, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
@@ -623,28 +623,62 @@ export default function RetailLocalShops() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24">
+      <section className="py-24 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="bg-primary rounded-[2.5rem] p-12 lg:p-24 text-center relative overflow-hidden">
-            <div className="absolute top-0 left-0 w-64 h-64 bg-white opacity-10 rounded-full blur-3xl transform -translate-x-1/2 -translate-y-1/2" />
-            <div className="absolute bottom-0 right-0 w-96 h-96 bg-accent opacity-20 rounded-full blur-3xl transform translate-x-1/2 translate-y-1/2" />
-            
-            <div className="relative z-10 max-w-3xl mx-auto">
-              <h2 className="text-4xl lg:text-5xl font-heading font-bold text-white mb-6">
-                Ready to take your shop online?
+          <div className="grid lg:grid-cols-5 gap-8 max-w-6xl mx-auto">
+            <div className="lg:col-span-3 bg-slate-900 rounded-3xl p-10 lg:p-12">
+              <h2 className="text-3xl lg:text-4xl font-heading font-bold text-white mb-4 leading-tight">
+                Transform Your Business With The Same AI System Used By India's Most Successful Online Entrepreneurs
               </h2>
-              <p className="text-xl text-white/80 mb-10">
-                Join thousands of shop owners growing their business with Vyaparify.
+              <p className="text-slate-400 mb-8">
+                The Proven System That Eliminates Silent Websites Forever
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" className="bg-white text-primary hover:bg-white/90 h-14 px-10 text-lg rounded-full font-bold shadow-xl">
-                  Start for Free
-                </Button>
-                <Button size="lg" variant="outline" className="bg-transparent border-2 border-white text-white hover:bg-white/10 h-14 px-10 text-lg rounded-full font-bold">
-                  View Demo
-                </Button>
+              
+              <div className="space-y-4 mb-8">
+                {[
+                  "Everything in Secret #1: AI Talking Website",
+                  "Everything in Secret #2: Google Rankings",
+                  "Everything in Secret #3: 24/7 Lead Mgmt",
+                ].map((feature, i) => (
+                  <div key={i} className="flex items-center gap-3">
+                    <div className="w-6 h-6 rounded-full border-2 border-primary flex items-center justify-center">
+                      <Check className="w-3 h-3 text-primary" />
+                    </div>
+                    <span className="text-white">{feature}</span>
+                  </div>
+                ))}
               </div>
-              <p className="mt-6 text-white/60 text-sm">No credit card required • Cancel anytime</p>
+              
+              <div className="bg-slate-800 rounded-xl p-4 flex items-start gap-3">
+                <div className="w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center shrink-0">
+                  <Clock className="w-4 h-4 text-primary" />
+                </div>
+                <div>
+                  <p className="text-primary font-bold text-sm">Limited Time Offer</p>
+                  <p className="text-slate-400 text-sm">
+                    Limited Time: First 100 businesses get free setup assistance worth ₹5,000
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+            <div className="lg:col-span-2 bg-white rounded-3xl p-8 lg:p-10 shadow-xl border border-border flex flex-col justify-center">
+              <p className="text-muted-foreground text-center mb-2">Annual Access</p>
+              <div className="text-center mb-2">
+                <span className="text-5xl lg:text-6xl font-bold">₹7,999</span>
+              </div>
+              <p className="text-center text-muted-foreground line-through mb-8">₹28,000 / year</p>
+              
+              <a href="/checkout" className="block">
+                <Button className="w-full h-14 text-lg font-bold rounded-xl bg-primary hover:bg-primary/90 shadow-lg">
+                  GET STARTED
+                  <ArrowRight className="ml-2 w-5 h-5" />
+                </Button>
+              </a>
+              
+              <p className="text-center text-muted-foreground text-sm mt-6">
+                No contracts, no hidden fees, cancel anytime
+              </p>
             </div>
           </div>
         </div>
