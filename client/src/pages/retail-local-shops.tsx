@@ -39,10 +39,6 @@ export default function RetailLocalShops() {
           </div>
 
           <div className="flex items-center gap-4">
-            <a href="#" className="hidden sm:block text-sm font-medium text-foreground hover:text-primary">Login</a>
-            <Button className="bg-primary hover:bg-primary/90 text-white shadow-lg shadow-primary/20 rounded-full px-6">
-              Get Started
-            </Button>
           </div>
         </div>
       </nav>
