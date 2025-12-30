@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 
 // Assets
 import heroImage from "@assets/generated_images/indian_shop_owner_businessman_using_smartphone.png";
-import mapImage from "@assets/ChatGPT_Image_Dec_30,_2025,_02_36_07_PM_1767087384759.png";
+import mapImage from "@assets/generated_images/local_business_visibility_3d_illustration.png";
 import dashboardImage from "@assets/screencapture-id-vyaparify-admin-beta-dashboard-2025-12-11-14__1767084671886.png";
 import logo from "@assets/logo.svg";
 import caseStudyAI from "@assets/Screenshot_2025-12-30_at_6.33.47_PM_1767099854878.png";
