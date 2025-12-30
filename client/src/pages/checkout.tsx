@@ -30,9 +30,10 @@ const planFeatures = [
   "Free Vyaparify Domain & Hosting Included",
 ];
 
-const originalPrice = 28000;
-const discountedPrice = 7999;
-const savings = originalPrice - discountedPrice;
+const originalPrice = 7999;
+const discountPercent = 20;
+const discountAmount = Math.round(originalPrice * discountPercent / 100);
+const discountedPrice = originalPrice - discountAmount;
 
 export default function Checkout() {
   const { toast } = useToast();
@@ -257,7 +258,7 @@ export default function Checkout() {
               </CardContent>
               <CardFooter className="bg-gradient-to-r from-orange-100 to-yellow-100 p-4">
                 <p className="w-full text-center font-bold text-orange-800">
-                  🎉 YOU ARE SAVING ₹{savings.toLocaleString()} TODAY!
+                  🎉 YOU ARE SAVING {discountPercent}% (₹{discountAmount.toLocaleString()}) TODAY!
                 </p>
               </CardFooter>
             </Card>
