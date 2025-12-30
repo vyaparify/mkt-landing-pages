@@ -10,6 +10,9 @@ import heroImage from "@assets/generated_images/indian_shop_owner_businessman_us
 import mapImage from "@assets/ChatGPT_Image_Dec_30,_2025,_02_36_07_PM_1767087384759.png";
 import dashboardImage from "@assets/screencapture-id-vyaparify-admin-beta-dashboard-2025-12-11-14__1767084671886.png";
 import logo from "@assets/logo.svg";
+import caseStudyAI from "@assets/generated_images/ai-powered_e-commerce_website_mockup.png";
+import caseStudyGoogle from "@assets/generated_images/google_first_page_ranking_success.png";
+import caseStudyDashboard from "@assets/generated_images/dashboard_and_lead_management_interface.png";
 
 const fadeIn = {
   initial: { opacity: 0, y: 20 },
@@ -519,6 +522,65 @@ export default function RetailLocalShops() {
                 </div>
               </CardContent>
             </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Case Studies Section */}
+      <section className="py-24 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <div className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary font-semibold text-sm mb-6">
+              What You Get
+            </div>
+            <h2 className="text-4xl font-heading font-bold mb-4">Everything You Need to Succeed Online</h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              From AI-powered websites to Google rankings and lead management - we've got you covered.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="group text-center">
+              <div className="overflow-hidden rounded-2xl mb-6 shadow-lg group-hover:shadow-xl transition-shadow">
+                <img 
+                  src={caseStudyAI} 
+                  alt="AI-Powered Website" 
+                  className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <h3 className="text-xl font-bold mb-3">Complete AI-Powered Website</h3>
+              <p className="text-muted-foreground leading-relaxed">
+                Get a fully functional, professional website created by AI in minutes. No coding or design skills needed.
+              </p>
+            </div>
+
+            <div className="group text-center">
+              <div className="overflow-hidden rounded-2xl mb-6 shadow-lg group-hover:shadow-xl transition-shadow">
+                <img 
+                  src={caseStudyGoogle} 
+                  alt="Google First Page Rankings" 
+                  className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <h3 className="text-xl font-bold mb-3">Google First Page Rankings</h3>
+              <p className="text-muted-foreground leading-relaxed">
+                Our SEO optimization ensures your business appears on Google's first page for local searches.
+              </p>
+            </div>
+
+            <div className="group text-center">
+              <div className="overflow-hidden rounded-2xl mb-6 shadow-lg group-hover:shadow-xl transition-shadow">
+                <img 
+                  src={caseStudyDashboard} 
+                  alt="Dashboard & Lead Management" 
+                  className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <h3 className="text-xl font-bold mb-3">Dashboard & Lead Management</h3>
+              <p className="text-muted-foreground leading-relaxed">
+                Track visitors, manage customer inquiries, and grow your business with our powerful dashboard.
+              </p>
+            </div>
           </div>
         </div>
       </section>
