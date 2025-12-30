@@ -29,10 +29,7 @@ export default function Home() {
       <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/40">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="bg-primary text-white p-1.5 rounded-lg">
-              <Store className="w-5 h-5" />
-            </div>
-            <span className="font-heading font-bold text-xl text-foreground">DukaanOnline</span>
+            <img src="/attached_assets/logo.svg" alt="Vyaparify" className="h-8 w-auto" />
           </div>
           
           <div className="hidden md:flex items-center gap-8">
@@ -319,7 +316,7 @@ export default function Home() {
                 Ready to take your shop online?
               </h2>
               <p className="text-xl text-white/80 mb-10">
-                Join thousands of shop owners growing their business with DukaanOnline.
+                Join thousands of shop owners growing their business with Vyaparify.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button size="lg" className="bg-white text-primary hover:bg-white/90 h-14 px-10 text-lg rounded-full font-bold shadow-xl">
@@ -341,10 +338,7 @@ export default function Home() {
           <div className="grid md:grid-cols-4 gap-8 mb-12">
             <div className="col-span-1 md:col-span-2">
               <div className="flex items-center gap-2 mb-4">
-                <div className="bg-primary text-white p-1.5 rounded-lg">
-                  <Store className="w-5 h-5" />
-                </div>
-                <span className="font-heading font-bold text-xl">DukaanOnline</span>
+                <img src="/attached_assets/logo.svg" alt="Vyaparify" className="h-8 w-auto" />
               </div>
               <p className="text-muted-foreground max-w-xs">
                 Empowering local businesses with simple, effective tools to sell online and grow locally.
@@ -371,7 +365,7 @@ export default function Home() {
           </div>
           
           <div className="border-t border-border pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
-            <p>© 2025 DukaanOnline. All rights reserved.</p>
+            <p>© 2025 Vyaparify. All rights reserved.</p>
             <div className="flex gap-6">
               <a href="#" className="hover:text-primary">Privacy Policy</a>
               <a href="#" className="hover:text-primary">Terms of Service</a>
