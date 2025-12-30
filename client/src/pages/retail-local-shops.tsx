@@ -6,7 +6,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 
 // Assets
 import heroImage from "@assets/generated_images/shop_owner_using_smartphone_in_retail_store.png";
-import mapImage from "/attached_assets/Screenshot_2025-12-30_at_2.36.19_PM_1767085600166.png";
+import mapImage from "@assets/Screenshot_2025-12-30_at_2.36.19_PM_1767085600166.png";
 import dashboardImage from "@assets/screencapture-id-vyaparify-admin-beta-dashboard-2025-12-11-14__1767084671886.png";
 import logo from "@assets/logo.svg";
 
