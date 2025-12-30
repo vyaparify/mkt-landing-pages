@@ -30,43 +30,45 @@ export default function RetailLocalShops() {
 
   return (
     <div className="min-h-screen bg-background font-sans overflow-x-hidden">
-      {/* Promotional Banner */}
-      {showBanner && (
-        <div className="fixed top-0 left-0 right-0 z-[60] bg-orange-600 text-white px-4 py-2 text-center text-sm font-medium flex items-center justify-center gap-2">
-          <span>🎉 Limited Time Offer: Get <span className="font-bold text-yellow-300">20% OFF</span> your subscription when you start today!</span>
-          <Button 
-            variant="ghost" 
-            size="icon" 
-            className="h-6 w-6 ml-2 text-white/80 hover:text-white hover:bg-white/20 rounded-full"
-            onClick={() => setShowBanner(false)}
-          >
-            <X className="h-3 w-3" />
-          </Button>
-        </div>
-      )}
+      <div className="fixed top-0 left-0 right-0 z-50 flex flex-col">
+        {/* Promotional Banner */}
+        {showBanner && (
+          <div className="bg-orange-600 text-white px-4 py-2 text-center text-sm font-medium flex items-center justify-center gap-2 relative">
+            <span>🎉 Limited Time Offer: Get <span className="font-bold text-yellow-300">20% OFF</span> your subscription when you start today!</span>
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="h-6 w-6 ml-2 text-white/80 hover:text-white hover:bg-white/20 rounded-full"
+              onClick={() => setShowBanner(false)}
+            >
+              <X className="h-3 w-3" />
+            </Button>
+          </div>
+        )}
 
-      {/* Navigation */}
-      <nav className={`fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/40 transition-all duration-300 ${showBanner ? 'mt-[36px]' : 'mt-0'}`}>
-        <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <img src={logo} alt="Vyaparify" className="h-8 w-auto" />
-          </div>
-          
-          <div className="hidden md:flex items-center gap-8">
-            <a href="#features" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">Features</a>
-            <a href="#how-it-works" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">How it Works</a>
-            <a href="#testimonials" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">Stories</a>
-          </div>
+        {/* Navigation */}
+        <nav className="bg-background/80 backdrop-blur-md border-b border-border/40 w-full">
+          <div className="container mx-auto px-4 h-16 flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <img src={logo} alt="Vyaparify" className="h-8 w-auto" />
+            </div>
+            
+            <div className="hidden md:flex items-center gap-8">
+              <a href="#features" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">Features</a>
+              <a href="#how-it-works" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">How it Works</a>
+              <a href="#testimonials" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">Stories</a>
+            </div>
 
-          <div className="flex items-center gap-4">
-            <a href="/checkout">
-              <Button className="bg-primary hover:bg-primary/90 text-white shadow-lg shadow-primary/20 rounded-full px-6">
-                Buy Now
-              </Button>
-            </a>
+            <div className="flex items-center gap-4">
+              <a href="/checkout">
+                <Button className="bg-primary hover:bg-primary/90 text-white shadow-lg shadow-primary/20 rounded-full px-6">
+                  Buy Now
+                </Button>
+              </a>
+            </div>
           </div>
-        </div>
-      </nav>
+        </nav>
+      </div>
 
       {/* Hero Section */}
       <section className="pt-32 pb-20 lg:pt-48 lg:pb-32 relative overflow-hidden">
