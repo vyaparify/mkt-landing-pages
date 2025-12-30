@@ -7,6 +7,8 @@ import NotFound from "@/pages/not-found";
 import Home from "@/pages/home";
 import RetailLocalShops from "@/pages/retail-local-shops";
 import Checkout from "@/pages/checkout";
+import ThankYou from "@/pages/thankyou";
+import PaymentFailed from "@/pages/payment-failed";
 
 function Router() {
   return (
@@ -14,6 +16,8 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/retail-local-shops" component={RetailLocalShops} />
       <Route path="/checkout" component={Checkout} />
+      <Route path="/thankyou" component={ThankYou} />
+      <Route path="/payment-failed" component={PaymentFailed} />
       <Route component={NotFound} />
     </Switch>
   );

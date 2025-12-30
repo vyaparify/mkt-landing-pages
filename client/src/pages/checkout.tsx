@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { motion } from "framer-motion";
-import { Check, Loader2, Lock, ShieldCheck, ShoppingCart, Info, ArrowLeft } from "lucide-react";
+import { Loader2, Lock, ShieldCheck, ShoppingCart, Info, ArrowLeft, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -38,8 +38,6 @@ const discountedPrice = originalPrice - discountAmount;
 export default function Checkout() {
   const { toast } = useToast();
   const [isProcessing, setIsProcessing] = useState(false);
-  const [paymentSuccess, setPaymentSuccess] = useState(false);
-  const [transactionId, setTransactionId] = useState("");
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -116,21 +114,12 @@ export default function Checkout() {
             });
 
             if (verifyRes.ok) {
-              setTransactionId(response.razorpay_payment_id);
-              setPaymentSuccess(true);
-              toast({
-                title: "Payment Successful!",
-                description: "Your subscription is now active.",
-              });
+              window.location.href = `/thankyou?txn=${response.razorpay_payment_id}&amount=${discountedPrice.toLocaleString()}`;
             } else {
-              throw new Error("Payment verification failed");
+              window.location.href = `/payment-failed?order=${response.razorpay_order_id}&error=verification_failed`;
             }
           } catch (error) {
-            toast({
-              title: "Payment verification failed",
-              description: "Please contact support if amount was deducted.",
-              variant: "destructive",
-            });
+            window.location.href = `/payment-failed?order=${response.razorpay_order_id}&error=verification_error`;
           }
           setIsProcessing(false);
         },
@@ -151,39 +140,6 @@ export default function Checkout() {
       });
       setIsProcessing(false);
     }
-  }
-
-  if (paymentSuccess) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-green-50 flex items-center justify-center p-4">
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="max-w-md w-full bg-white rounded-2xl shadow-xl p-8 text-center"
-        >
-          <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 text-green-600">
-            <Check className="w-10 h-10" />
-          </div>
-          <h2 className="text-2xl font-bold mb-2">Payment Successful!</h2>
-          <p className="text-muted-foreground mb-8">
-            Thank you for choosing Vyaparify. Your subscription is now active. Check your email for login details.
-          </p>
-          <div className="bg-secondary/50 p-4 rounded-xl mb-8 text-left text-sm">
-            <div className="flex justify-between mb-2">
-              <span className="text-muted-foreground">Amount Paid</span>
-              <span className="font-bold">₹{discountedPrice.toLocaleString()}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-muted-foreground">Transaction ID</span>
-              <span className="font-mono text-xs">{transactionId}</span>
-            </div>
-          </div>
-          <Button className="w-full bg-primary hover:bg-primary/90" onClick={() => window.location.href = "/retail-local-shops"}>
-            Go Back to Home
-          </Button>
-        </motion.div>
-      </div>
-    );
   }
 
   return (
