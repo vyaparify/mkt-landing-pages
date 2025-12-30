@@ -550,7 +550,7 @@ export default function RetailLocalShops() {
               </div>
               <h3 className="text-xl font-bold mb-3">Complete AI-Powered Website</h3>
               <p className="text-muted-foreground leading-relaxed">
-                Get a fully functional, professional website created by AI in minutes. No coding or design skills needed.
+                Get access to India's most advanced AI website platform designed specifically for non-technical business owners. Build, customize, and manage your professional talking website that converts visitors into customers 24/7.
               </p>
             </div>
 
