@@ -636,9 +636,9 @@ export default function RetailLocalShops() {
               
               <div className="space-y-4 mb-8">
                 {[
-                  "Everything in Secret #1: AI Talking Website",
-                  "Everything in Secret #2: Google Rankings",
-                  "Everything in Secret #3: 24/7 Lead Mgmt",
+                  "Complete AI-Powered Website",
+                  "Higher Google Rankings",
+                  "Run Offers & Share eGreetings",
                 ].map((feature, i) => (
                   <div key={i} className="flex items-center gap-3">
                     <div className="w-6 h-6 rounded-full border-2 border-primary flex items-center justify-center">
