@@ -60,7 +60,7 @@ export default function RetailLocalShops() {
             >
               <motion.div variants={fadeIn} className="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-full border border-border shadow-sm mb-6">
                 <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                <span className="text-sm font-medium text-muted-foreground">Trusted by 10,000+ local shops</span>
+                <span className="text-sm font-medium text-muted-foreground">Trusted by 1,50,000+ local shops</span>
               </motion.div>
               
               <motion.h1 variants={fadeIn} className="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold text-foreground leading-[1.1] mb-6">
