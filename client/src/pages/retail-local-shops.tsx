@@ -551,7 +551,7 @@ export default function RetailLocalShops() {
                 <img 
                   src={caseStudyAI} 
                   alt="AI-Powered Website" 
-                  className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-64 object-cover object-top group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
               <h3 className="text-xl font-bold mb-3">Complete AI-Powered Website</h3>
@@ -565,7 +565,7 @@ export default function RetailLocalShops() {
                 <img 
                   src={caseStudyGoogle} 
                   alt="Google First Page Rankings" 
-                  className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-64 object-cover object-top group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
               <h3 className="text-xl font-bold mb-3">Google First Page Rankings</h3>
@@ -579,7 +579,7 @@ export default function RetailLocalShops() {
                 <img 
                   src={caseStudyDashboard} 
                   alt="Dashboard & Lead Management" 
-                  className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-64 object-cover object-top group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
               <h3 className="text-xl font-bold mb-3">Dashboard & Lead Management</h3>
