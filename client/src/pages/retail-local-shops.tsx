@@ -628,7 +628,7 @@ export default function RetailLocalShops() {
           <div className="grid lg:grid-cols-5 gap-8 max-w-6xl mx-auto">
             <div className="lg:col-span-3 bg-slate-900 rounded-3xl p-10 lg:p-12">
               <h2 className="text-3xl lg:text-4xl font-heading font-bold text-white mb-4 leading-tight">
-                Transform Your Business With The Same AI System Used By India's Most Successful Online Entrepreneurs
+                Ready to take your shop online?
               </h2>
               <p className="text-slate-400 mb-8">
                 The Proven System That Eliminates Silent Websites Forever
