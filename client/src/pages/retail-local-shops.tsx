@@ -3,6 +3,8 @@ import { ArrowRight, Check, MapPin, MessageCircle, ShoppingBag, Smartphone, Stor
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import Booker from "@/components/Booker";
 import { useState } from "react";
 
 // Assets
@@ -97,10 +99,17 @@ export default function RetailLocalShops() {
                   Create Shop in 2 Mins
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
-                <Button size="lg" variant="outline" className="h-14 px-8 text-lg rounded-full border-2 hover:bg-secondary/50">
-                  <Calendar className="mr-2 w-5 h-5 text-green-600" />
-                  Book a Demo
-                </Button>
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button size="lg" variant="outline" className="h-14 px-8 text-lg rounded-full border-2 hover:bg-secondary/50">
+                      <Calendar className="mr-2 w-5 h-5 text-green-600" />
+                      Book a Demo
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="sm:max-w-[800px] h-[80vh] p-0 overflow-hidden">
+                     <Booker />
+                  </DialogContent>
+                </Dialog>
               </motion.div>
               
               <motion.div variants={fadeIn} className="mt-10 flex items-center gap-4 text-sm text-muted-foreground">
