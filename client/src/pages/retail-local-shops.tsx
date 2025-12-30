@@ -124,10 +124,12 @@ export default function RetailLocalShops() {
               </motion.p>
               
               <motion.div variants={fadeIn} className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" className="h-14 px-8 text-lg rounded-full bg-primary hover:bg-primary/90 shadow-xl shadow-primary/25">
-                  Create Shop in 2 Mins
-                  <ArrowRight className="ml-2 w-5 h-5" />
-                </Button>
+                <a href="https://id.vyaparify.com/register?utm_source=metagoogle&utm_medium=landing&utm_campaign=retail-local-shops&utm_id=vrpl1225">
+                  <Button size="lg" className="h-14 px-8 text-lg rounded-full bg-primary hover:bg-primary/90 shadow-xl shadow-primary/25">
+                    Create Shop in 2 Mins
+                    <ArrowRight className="ml-2 w-5 h-5" />
+                  </Button>
+                </a>
                 <Button 
                   size="lg" 
                   variant="outline" 
