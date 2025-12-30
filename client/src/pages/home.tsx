@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Check, MapPin, MessageCircle, ShoppingBag, Smartphone, Store, TrendingUp, Zap } from "lucide-react";
+import { ArrowRight, Check, MapPin, MessageCircle, ShoppingBag, Smartphone, Store, TrendingUp, Zap, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -78,8 +78,8 @@ export default function Home() {
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
                 <Button size="lg" variant="outline" className="h-14 px-8 text-lg rounded-full border-2 hover:bg-secondary/50">
-                  <MessageCircle className="mr-2 w-5 h-5 text-green-600" />
-                  Chat on WhatsApp
+                  <Calendar className="mr-2 w-5 h-5 text-green-600" />
+                  Book a Demo
                 </Button>
               </motion.div>
               
