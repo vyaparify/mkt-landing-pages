@@ -68,7 +68,7 @@ export default function RetailLocalShops() {
               </motion.h1>
               
               <motion.p variants={fadeIn} className="text-lg text-muted-foreground mb-8 leading-relaxed max-w-lg">
-                No technical knowledge needed. Works like WhatsApp. capture orders from nearby customers and grow your business today.
+                No technical knowledge needed. Your AI Website. capture orders from nearby customers and grow your business today.
               </motion.p>
               
               <motion.div variants={fadeIn} className="flex flex-col sm:flex-row gap-4">
