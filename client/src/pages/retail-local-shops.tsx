@@ -631,7 +631,7 @@ export default function RetailLocalShops() {
                 Ready to take your shop online?
               </h2>
               <p className="text-slate-400 mb-8">
-                The Proven System That Eliminates Silent Websites Forever
+                Join thousands of shop owners growing their business with Vyaparify.
               </p>
               
               <div className="space-y-4 mb-8">
