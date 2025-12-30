@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, Check, MapPin, MessageCircle, ShoppingBag, Smartphone, Store, TrendingUp, Zap, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 
 // Assets
 import heroImage from "@assets/generated_images/shop_owner_using_smartphone_in_retail_store.png";
@@ -128,6 +129,67 @@ export default function RetailLocalShops() {
                 </div>
               </motion.div>
             </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Trusted By Banks Section */}
+      <section className="py-12 bg-white border-y border-border">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-8">
+            <h3 className="text-xl font-bold font-heading mb-2">Trusted by Leading Banks</h3>
+            <p className="text-muted-foreground text-sm">Bank-Grade Security & Compliance</p>
+          </div>
+          
+          <div className="w-full max-w-5xl mx-auto">
+            <Carousel
+              opts={{
+                align: "center",
+                loop: true,
+              }}
+              className="w-full"
+            >
+              <CarouselContent className="-ml-2 md:-ml-4 items-center">
+                <CarouselItem className="pl-2 md:pl-4 basis-1/2 md:basis-1/4">
+                  <div className="p-4 flex items-center justify-center h-24 border rounded-xl hover:shadow-md transition-shadow">
+                    <img 
+                      src="https://cdn.prod.website-files.com/66cc4a7725e8b95940b34e83/68455df884f7dbb961db9102_1.png" 
+                      alt="HDFC Bank" 
+                      className="max-h-12 w-auto object-contain"
+                    />
+                  </div>
+                </CarouselItem>
+                <CarouselItem className="pl-2 md:pl-4 basis-1/2 md:basis-1/4">
+                  <div className="p-4 flex items-center justify-center h-24 border rounded-xl hover:shadow-md transition-shadow">
+                    <img 
+                      src="https://cdn.prod.website-files.com/66cc4a7725e8b95940b34e83/68455df84635034fba3a9792_2.png" 
+                      alt="AU Small Finance Bank" 
+                      className="max-h-12 w-auto object-contain"
+                    />
+                  </div>
+                </CarouselItem>
+                <CarouselItem className="pl-2 md:pl-4 basis-1/2 md:basis-1/4">
+                  <div className="p-4 flex items-center justify-center h-24 border rounded-xl hover:shadow-md transition-shadow">
+                    <img 
+                      src="https://cdn.prod.website-files.com/66cc4a7725e8b95940b34e83/68455df826534506568ee82d_3.png" 
+                      alt="City Union Bank" 
+                      className="max-h-12 w-auto object-contain"
+                    />
+                  </div>
+                </CarouselItem>
+                <CarouselItem className="pl-2 md:pl-4 basis-1/2 md:basis-1/4">
+                  <div className="p-4 flex items-center justify-center h-24 border rounded-xl hover:shadow-md transition-shadow">
+                    <img 
+                      src="https://cdn.prod.website-files.com/66cc4a7725e8b95940b34e83/6845b98b5d7092f023e9d98f_5.png" 
+                      alt="Yalamanchili" 
+                      className="max-h-12 w-auto object-contain"
+                    />
+                  </div>
+                </CarouselItem>
+              </CarouselContent>
+              <CarouselPrevious className="hidden md:flex" />
+              <CarouselNext className="hidden md:flex" />
+            </Carousel>
           </div>
         </div>
       </section>
