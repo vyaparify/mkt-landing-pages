@@ -705,7 +705,7 @@ export default function RetailLocalShops() {
                 <img src={logo} alt="Vyaparify" className="h-8 w-auto" />
               </div>
               <p className="text-muted-foreground max-w-xs">
-                Empowering local businesses with simple, effective tools to sell online and grow locally.
+                All-in-one AI Powered Platform for eCommerce, Marketing, Engagement & Payments
               </p>
             </div>
             
