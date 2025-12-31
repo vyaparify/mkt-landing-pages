@@ -57,8 +57,12 @@ export default function RetailLocalShops() {
     document.head.appendChild(link);
 
     return () => {
-      document.head.removeChild(script);
-      document.head.removeChild(link);
+      if (script.parentNode) {
+        script.parentNode.removeChild(script);
+      }
+      if (link.parentNode) {
+        link.parentNode.removeChild(link);
+      }
     };
   }, []);
 
