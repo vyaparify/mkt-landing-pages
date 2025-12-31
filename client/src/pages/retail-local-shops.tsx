@@ -451,7 +451,7 @@ export default function RetailLocalShops() {
                     <span className="text-muted-foreground flex items-center gap-2">
                       <MapPin className="w-4 h-4" /> Location
                     </span>
-                    <span className="font-medium">Singapore International</span>
+                    <span className="font-medium">Indore</span>
                   </div>
                 </div>
               </CardContent>
