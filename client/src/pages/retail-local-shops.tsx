@@ -74,10 +74,12 @@ export default function RetailLocalShops() {
         {/* Promotional Banner */}
         {showBanner && (
           <div className="bg-orange-600 text-white px-4 py-2 text-center text-sm font-medium flex items-center justify-center gap-2 relative">
-            <span>🎉 Limited Time Offer: Get <span className="font-bold text-yellow-300">20% OFF</span> your subscription when you start today!</span>
-            <a href="/checkout" className="underline font-bold hover:text-yellow-300 ml-2">
-              Buy Now
-            </a>
+            <span className="flex items-center gap-2 flex-wrap justify-center">
+              <span>🎉 Limited Time Offer: Get <span className="font-bold text-yellow-300">20% OFF</span> your subscription when you start today!</span>
+              <a href="/checkout" className="underline font-bold hover:text-yellow-300 whitespace-nowrap">
+                Buy Now
+              </a>
+            </span>
             <Button 
               variant="ghost" 
               size="icon" 
