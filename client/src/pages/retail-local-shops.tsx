@@ -306,6 +306,10 @@ export default function RetailLocalShops() {
               </CardContent>
             </Card>
           </div>
+
+          <p className="text-center text-lg font-semibold text-primary mt-10">
+            Vyaparify is built for shop owners - not software experts
+          </p>
         </div>
       </section>
 
