@@ -711,8 +711,8 @@ export default function RetailLocalShops() {
           <div className="border-t border-border pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
             <p>© 2025 Vyaparify. All rights reserved.</p>
             <div className="flex gap-6">
-              <a href="#" className="hover:text-primary">Privacy Policy</a>
-              <a href="#" className="hover:text-primary">Terms of Service</a>
+              <a href="https://id.vyaparify.com/privacy-policy" className="hover:text-primary">Privacy Policy</a>
+              <a href="https://id.vyaparify.com/terms-conditions" className="hover:text-primary">Terms of Service</a>
             </div>
           </div>
         </div>
