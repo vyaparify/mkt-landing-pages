@@ -677,8 +677,8 @@ export default function RetailLocalShops() {
               </p>
               <p className="text-muted-foreground text-center mb-2">Annual Access</p>
               <div className="text-center mb-2">
-                <span className="text-2xl text-muted-foreground line-through mr-2">₹9,999</span>
-                <span className="text-5xl lg:text-6xl font-bold text-primary">₹7,999</span>
+                <span className="text-2xl text-muted-foreground line-through mr-2">₹7,999</span>
+                <span className="text-5xl lg:text-6xl font-bold text-primary">₹6,399</span>
               </div>
                             
               <a href="/checkout" className="block">
