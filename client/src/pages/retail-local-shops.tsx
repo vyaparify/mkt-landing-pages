@@ -429,15 +429,15 @@ export default function RetailLocalShops() {
                   <Star className="w-5 h-5 fill-current" />
                 </div>
                 <p className="text-muted-foreground leading-relaxed">
-                  "Wanted to expand my ethnic kids clothing business to Singapore market. Vyaparify helped me achieve #1 ranking and now getting international orders!"
+                  "Now customers from nearby areas find my shop on Google."
                 </p>
                 <div className="flex items-center gap-4">
                   <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center font-bold text-gray-600">
-                    K
+                    R
                   </div>
                   <div>
-                    <h4 className="font-bold">Klingaru</h4>
-                    <p className="text-xs text-muted-foreground">Ethnic Clothes for Kids</p>
+                    <h4 className="font-bold">Rajesh</h4>
+                    <p className="text-xs text-muted-foreground">Kirana Store, Indore</p>
                   </div>
                 </div>
                 <div className="bg-gray-50 rounded-xl p-4 space-y-2 text-sm">
