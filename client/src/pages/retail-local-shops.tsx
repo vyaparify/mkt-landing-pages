@@ -332,8 +332,7 @@ export default function RetailLocalShops() {
               </div>
               <h2 className="text-4xl font-heading font-bold mb-6">Simple Enough for <br />Anyone to Use</h2>
               <p className="text-lg text-muted-foreground mb-8">
-                No training. No confusion.<br />
-                If you can use WhatsApp, you can use Vyaparify.
+                No training. No confusion. If you can use WhatsApp, you can use Vyaparify.
               </p>
               
               <ul className="space-y-4">
