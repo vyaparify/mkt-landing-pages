@@ -699,33 +699,13 @@ export default function RetailLocalShops() {
       {/* Footer */}
       <footer className="bg-white border-t border-border pt-16 pb-8">
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-4 gap-8 mb-12">
-            <div className="col-span-1 md:col-span-2">
-              <div className="flex items-center gap-2 mb-4">
-                <img src={logo} alt="Vyaparify" className="h-8 w-auto" />
-              </div>
-              <p className="text-muted-foreground max-w-xs">
-                All-in-one AI Powered Platform for eCommerce, Marketing, Engagement & Payments
-              </p>
+          <div className="mb-12">
+            <div className="flex items-center gap-2 mb-4">
+              <img src={logo} alt="Vyaparify" className="h-8 w-auto" />
             </div>
-            
-            <div>
-              <h4 className="font-bold mb-4">Product</h4>
-              <ul className="space-y-2 text-muted-foreground">
-                <li><a href="#" className="hover:text-primary">Features</a></li>
-                <li><a href="#" className="hover:text-primary">Pricing</a></li>
-                <li><a href="#" className="hover:text-primary">Showcase</a></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h4 className="font-bold mb-4">Support</h4>
-              <ul className="space-y-2 text-muted-foreground">
-                <li><a href="#" className="hover:text-primary">Help Center</a></li>
-                <li><a href="#" className="hover:text-primary">Community</a></li>
-                <li><a href="#" className="hover:text-primary">Contact Us</a></li>
-              </ul>
-            </div>
+            <p className="text-muted-foreground max-w-md">
+              All-in-one AI Powered Platform for eCommerce, Marketing, Engagement & Payments
+            </p>
           </div>
           
           <div className="border-t border-border pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
