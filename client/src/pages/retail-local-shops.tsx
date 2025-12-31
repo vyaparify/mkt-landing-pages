@@ -666,13 +666,19 @@ export default function RetailLocalShops() {
               </div>
             </div>
             
-            <div className="lg:col-span-2 bg-white rounded-3xl p-8 lg:p-10 shadow-xl border border-border flex flex-col justify-center">
-              <p className="text-sm text-center text-muted-foreground mb-4 leading-relaxed">
+            <div className="lg:col-span-2 bg-white rounded-3xl p-8 lg:p-10 shadow-xl border border-border flex flex-col justify-center relative">
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                <span className="bg-gradient-to-r from-red-500 to-orange-500 text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-lg">
+                  New Year Offer 20% OFF
+                </span>
+              </div>
+              <p className="text-sm text-center text-muted-foreground mb-4 leading-relaxed mt-2">
                 No commissions. No revenue sharing. One-time investment, Most shop owners recover the cost from their first few online orders.
               </p>
               <p className="text-muted-foreground text-center mb-2">Annual Access</p>
               <div className="text-center mb-2">
-                <span className="text-5xl lg:text-6xl font-bold">₹7,999</span>
+                <span className="text-2xl text-muted-foreground line-through mr-2">₹9,999</span>
+                <span className="text-5xl lg:text-6xl font-bold text-primary">₹7,999</span>
               </div>
                             
               <a href="/checkout" className="block">
