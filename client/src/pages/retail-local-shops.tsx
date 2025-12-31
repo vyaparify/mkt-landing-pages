@@ -632,7 +632,7 @@ export default function RetailLocalShops() {
           <div className="grid lg:grid-cols-5 gap-8 max-w-6xl mx-auto">
             <div className="lg:col-span-3 bg-slate-900 rounded-3xl p-10 lg:p-12">
               <h2 className="text-3xl lg:text-4xl font-heading font-bold text-white mb-4 leading-tight">
-                Ready to take your shop online?
+                Start Free — Get Your Shop Online in Minutes
               </h2>
               <p className="text-slate-400 mb-8">
                 Join thousands of shop owners growing their business with Vyaparify.
