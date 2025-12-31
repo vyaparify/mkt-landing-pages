@@ -110,7 +110,7 @@ export default function RetailLocalShops() {
       </div>
 
       {/* Hero Section */}
-      <section className="pt-32 pb-20 lg:pt-48 lg:pb-32 relative overflow-hidden">
+      <section className="pt-40 pb-20 lg:pt-48 lg:pb-32 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-1/2 h-full bg-secondary/50 -skew-x-12 translate-x-1/4 -z-10" />
         
         <div className="container mx-auto px-4">
