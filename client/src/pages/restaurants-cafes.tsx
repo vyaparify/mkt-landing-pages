@@ -156,6 +156,10 @@ export default function RestaurantsCafes() {
                 </Button>
               </motion.div>
               
+              <motion.p variants={fadeIn} className="text-sm text-muted-foreground mt-3">
+                No credit card required. Free setup.
+              </motion.p>
+              
               <motion.div variants={fadeIn} className="mt-10 flex items-center gap-4 text-sm text-muted-foreground">
                 <div className="flex -space-x-2">
                   {avatars.map((avatar, i) => (
