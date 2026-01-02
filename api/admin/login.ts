@@ -10,6 +10,21 @@ interface VercelResponse extends ServerResponse {
   json: (data: any) => void;
 }
 
+async function parseBody(req: IncomingMessage): Promise<any> {
+  return new Promise((resolve, reject) => {
+    let body = '';
+    req.on('data', (chunk) => { body += chunk; });
+    req.on('end', () => {
+      try {
+        resolve(body ? JSON.parse(body) : {});
+      } catch (e) {
+        reject(e);
+      }
+    });
+    req.on('error', reject);
+  });
+}
+
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -20,7 +35,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(500).json({ error: 'Admin password not configured. Set ADMIN_PASSWORD in environment variables.' });
   }
 
-  const { password } = req.body;
+  const body = req.body || await parseBody(req);
+  const { password } = body;
 
   if (password === adminPassword) {
     res.status(200).json({ success: true });
