@@ -100,6 +100,16 @@ export function LeadCaptureModal({ isOpen, onClose, source = "retail-local-shops
       
       const leadData = await leadResponse.json();
       
+      // Track Meta Pixel Lead event on form submission
+      if (typeof (window as any).fbq === 'function') {
+        (window as any).fbq('track', 'Lead', {
+          content_name: 'Vyaparify Premium',
+          content_category: source,
+          value: 7999,
+          currency: 'INR',
+        });
+      }
+      
       const orderResponse = await fetch("/api/razorpay/create-order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -159,6 +169,15 @@ export function LeadCaptureModal({ isOpen, onClose, source = "retail-local-shops
             });
             
             if (verifyResponse.ok) {
+              // Track Meta Pixel Purchase event on successful payment
+              if (typeof (window as any).fbq === 'function') {
+                (window as any).fbq('track', 'Purchase', {
+                  content_name: 'Vyaparify Premium Annual',
+                  content_category: source,
+                  value: 7999,
+                  currency: 'INR',
+                });
+              }
               window.location.href = `/thank-you?payment_id=${response.razorpay_payment_id}&name=${encodeURIComponent(formData.name)}`;
             } else {
               alert("Payment verification failed. Please contact support.");
