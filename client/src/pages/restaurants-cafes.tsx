@@ -127,21 +127,21 @@ export default function RestaurantsCafes() {
             >
               <motion.div variants={fadeIn} className="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-full border border-border shadow-sm mb-6">
                 <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                <span className="text-sm font-medium text-muted-foreground">Trusted by 1,50,000+ local shops</span>
+                <span className="text-sm font-medium text-muted-foreground">Trusted by thousands of restaurants & food businesses</span>
               </motion.div>
               
               <motion.h1 variants={fadeIn} className="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold text-foreground leading-[1.1] mb-6">
-                Online Selling Made <span className="text-primary">Simple</span> for Local Shops
+                Online Ordering Made <span className="text-primary">Simple</span> for Restaurants & Cafes
               </motion.h1>
               
               <motion.p variants={fadeIn} className="text-lg text-muted-foreground mb-8 leading-relaxed max-w-lg">
-                No technical knowledge needed. Your AI Website. capture orders from nearby customers and grow your business today.
+                No tech knowledge needed. Take direct online orders, reduce commissions, and grow repeat customers — without relying on aggregators.
               </motion.p>
               
               <motion.div variants={fadeIn} className="flex flex-col sm:flex-row gap-4 items-start">
-                <a href="https://id.vyaparify.com/register?utm_source=metagoogle&utm_medium=landing&utm_campaign=retail-local-shops&utm_id=vrpl1225">
+                <a href="https://id.vyaparify.com/register?utm_source=metagoogle&utm_medium=landing&utm_campaign=restaurants-cafes&utm_id=vrcf1225">
                   <Button size="lg" className="h-16 px-10 text-xl font-bold rounded-full bg-primary hover:bg-primary/90 shadow-2xl shadow-primary/30 transform hover:scale-105 transition-all duration-200">
-                    Create Shop in 2 Mins
+                    Start Taking Orders in 2 Mins
                     <ArrowRight className="ml-2 w-6 h-6" />
                   </Button>
                 </a>
@@ -166,7 +166,7 @@ export default function RestaurantsCafes() {
                     <img key={i} src={avatar} alt={`Customer ${i + 1}`} className="w-8 h-8 rounded-full border-2 border-background object-cover" />
                   ))}
                 </div>
-                <p>Join other shop owners in your area</p>
+                <p>Join other restaurant owners in your area</p>
               </motion.div>
             </motion.div>
             
@@ -254,7 +254,7 @@ export default function RestaurantsCafes() {
           </div>
           
           <p className="text-center text-sm text-muted-foreground mt-6">
-            Used by kirana, apparel & electronics shops across India
+            Used by restaurants, cafes & cloud kitchens across India
           </p>
         </div>
       </section>
@@ -265,7 +265,7 @@ export default function RestaurantsCafes() {
           <div className="text-center max-w-2xl mx-auto mb-16">
             <h2 className="text-3xl font-heading font-bold mb-4">Going Online Feels Complicated?</h2>
             <p className="text-muted-foreground text-lg">
-              Most shop owners worry about technology, costs, and finding customers. We solved that.
+              Most restaurant owners worry about commissions, technology, and managing orders during peak hours. We solved that.
             </p>
           </div>
           
@@ -275,9 +275,9 @@ export default function RestaurantsCafes() {
                 <div className="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center text-red-600 mb-6">
                   <Zap className="w-6 h-6" />
                 </div>
-                <h3 className="text-xl font-bold mb-3">Too Technical?</h3>
+                <h3 className="text-xl font-bold mb-3">High Commissions</h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  Apps, English menus, and confusing dashboards make online selling feel like a headache.
+                  Aggregator fees eat into your profits and force discounts.
                 </p>
               </CardContent>
             </Card>
@@ -285,11 +285,11 @@ export default function RestaurantsCafes() {
             <Card className="border-none shadow-lg hover:shadow-xl transition-shadow bg-secondary/30">
               <CardContent className="p-8">
                 <div className="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center text-orange-600 mb-6">
-                  <MapPin className="w-6 h-6" />
+                  <Clock className="w-6 h-6" />
                 </div>
-                <h3 className="text-xl font-bold mb-3">Where are Customers?</h3>
+                <h3 className="text-xl font-bold mb-3">Order Chaos</h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  "If I make an online shop, who will find it?" You don't need nationwide buyers, you need locals.
+                  Multiple tablets, calls, and WhatsApp orders create confusion and mistakes.
                 </p>
               </CardContent>
             </Card>
@@ -299,16 +299,16 @@ export default function RestaurantsCafes() {
                 <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600 mb-6">
                   <TrendingUp className="w-6 h-6" />
                 </div>
-                <h3 className="text-xl font-bold mb-3">Too Expensive?</h3>
+                <h3 className="text-xl font-bold mb-3">No Repeat Customers</h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  High commissions and expensive ads eat into your profits. You need a better way.
+                  Customers order once — then disappear into aggregator apps.
                 </p>
               </CardContent>
             </Card>
           </div>
 
           <p className="text-center text-lg font-semibold text-primary mt-10">
-            Vyaparify is built for shop owners - not software experts
+            Vyaparify is built for restaurant owners - not software experts
           </p>
         </div>
       </section>
@@ -332,15 +332,15 @@ export default function RestaurantsCafes() {
               </div>
               <h2 className="text-4xl font-heading font-bold mb-6">Simple Enough for <br />Anyone to Use</h2>
               <p className="text-lg text-muted-foreground mb-8">
-                No training. No confusion. If you can use WhatsApp, you can use Vyaparify.
+                No training. No complicated systems. If your staff can use WhatsApp, they can use Vyaparify.
               </p>
               
               <ul className="space-y-4">
                 {[
-                  "No technical knowledge needed",
-                  "One Simple Platform",
-                  "Set up your catalog in minutes",
-                  "Receive orders instantly on your phone"
+                  "No technical knowledge required",
+                  "One simple dashboard for all orders",
+                  "Accept orders directly from customers",
+                  "Get order alerts instantly on your phone"
                 ].map((item, i) => (
                   <li key={i} className="flex items-center gap-3">
                     <div className="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center text-green-600 shrink-0">
@@ -365,17 +365,29 @@ export default function RestaurantsCafes() {
               </div>
               <h2 className="text-4xl font-heading font-bold mb-6">Customers From Your <br />Local Area</h2>
               <p className="text-lg text-muted-foreground mb-8">
-                Your shop shows up in local online searches. Nearby customers can easily find and contact you directly.
+                Nearby customers are already searching for food online. Make it easy for them to order directly from you.
               </p>
               
-              <div className="bg-secondary/30 p-6 rounded-2xl mb-8 border border-border">
+              <div className="bg-secondary/30 p-6 rounded-2xl mb-4 border border-border">
+                <div className="flex items-start gap-4">
+                  <div className="bg-white p-3 rounded-xl shadow-sm text-green-600">
+                    <MapPin className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-lg mb-1">Show up on Google</h4>
+                    <p className="text-sm text-muted-foreground">When people search for food nearby, they find you.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-secondary/30 p-6 rounded-2xl mb-4 border border-border">
                 <div className="flex items-start gap-4">
                   <div className="bg-white p-3 rounded-xl shadow-sm text-green-600">
                     <MessageCircle className="w-6 h-6" />
                   </div>
                   <div>
                     <h4 className="font-bold text-lg mb-1">Share on WhatsApp</h4>
-                    <p className="text-sm text-muted-foreground">Send your shop link to customers. They browse, you deliver.</p>
+                    <p className="text-sm text-muted-foreground">Share your menu & ordering link with customers.</p>
                   </div>
                 </div>
               </div>
@@ -383,18 +395,18 @@ export default function RestaurantsCafes() {
               <div className="bg-secondary/30 p-6 rounded-2xl border border-border">
                 <div className="flex items-start gap-4">
                   <div className="bg-white p-3 rounded-xl shadow-sm text-orange-600">
-                    <MapPin className="w-6 h-6" />
+                    <ShoppingBag className="w-6 h-6" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-lg mb-1">Local Visibility</h4>
-                    <p className="text-sm text-muted-foreground">Higher Google Search Ranking in your area</p>
+                    <h4 className="font-bold text-lg mb-1">All Order Types</h4>
+                    <p className="text-sm text-muted-foreground">Accept dine-in, takeaway & delivery orders.</p>
                   </div>
                 </div>
               </div>
               
-              <a href="https://id.vyaparify.com/register?utm_source=metagoogle&utm_medium=landing&utm_campaign=retail-local-shops&utm_id=vrpl1225" className="inline-block mt-8">
+              <a href="https://id.vyaparify.com/register?utm_source=metagoogle&utm_medium=landing&utm_campaign=restaurants-cafes&utm_id=vrcf1225" className="inline-block mt-8">
                 <Button size="lg" className="h-14 px-8 text-lg font-bold rounded-full bg-primary hover:bg-primary/90 shadow-xl shadow-primary/25">
-                  Create Shop in 2 Mins
+                  Start Taking Orders in 2 Mins
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
               </a>
@@ -421,7 +433,7 @@ export default function RestaurantsCafes() {
             </div>
             <h2 className="text-4xl font-heading font-bold mb-4">Real Google Rankings, Real Success</h2>
             <p className="text-muted-foreground text-lg">
-              Join 1,00,000+ merchants already ranking on Google's first page.
+              Join 10,000+ restaurants & cafes getting direct orders from Google.
             </p>
           </div>
 
@@ -436,7 +448,7 @@ export default function RestaurantsCafes() {
                   <Star className="w-5 h-5 fill-current" />
                 </div>
                 <p className="text-muted-foreground leading-relaxed">
-                  "Now customers from nearby areas find my shop on Google."
+                  "Customers now find us directly on Google and order without Zomato."
                 </p>
                 <div className="flex items-center gap-4">
                   <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center font-bold text-gray-600">
@@ -444,7 +456,7 @@ export default function RestaurantsCafes() {
                   </div>
                   <div>
                     <h4 className="font-bold">Rajesh</h4>
-                    <p className="text-xs text-muted-foreground">Kirana Store, Indore</p>
+                    <p className="text-xs text-muted-foreground">Restaurant Owner, Mumbai</p>
                   </div>
                 </div>
                 <div className="bg-gray-50 rounded-xl p-4 space-y-2 text-sm">
@@ -474,15 +486,15 @@ export default function RestaurantsCafes() {
                   <Star className="w-5 h-5 fill-current" />
                 </div>
                 <p className="text-muted-foreground leading-relaxed">
-                  "Running AC repair services in Kanpur. Vyaparify helped me achieve #2 ranking for AC repair services and now getting steady customer inquiries!"
+                  "We reduced commissions and built repeat customers easily. No more dependency on Swiggy!"
                 </p>
                 <div className="flex items-center gap-4">
                   <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center font-bold text-gray-600">
                     S
                   </div>
                   <div>
-                    <h4 className="font-bold">Shivaay Enterprises</h4>
-                    <p className="text-xs text-muted-foreground">Multi-Service Business</p>
+                    <h4 className="font-bold">Sneha</h4>
+                    <p className="text-xs text-muted-foreground">Café Owner, Bangalore</p>
                   </div>
                 </div>
                 <div className="bg-gray-50 rounded-xl p-4 space-y-2 text-sm">
@@ -496,7 +508,7 @@ export default function RestaurantsCafes() {
                     <span className="text-muted-foreground flex items-center gap-2">
                       <MapPin className="w-4 h-4" /> Location
                     </span>
-                    <span className="font-medium">Kanpur, UP</span>
+                    <span className="font-medium">Bangalore</span>
                   </div>
                 </div>
               </CardContent>
@@ -512,15 +524,15 @@ export default function RestaurantsCafes() {
                   <Star className="w-5 h-5 fill-current" />
                 </div>
                 <p className="text-muted-foreground leading-relaxed">
-                  "Specializing in formal wear for women in Ankleshwar. Vyaparify helped me reach #3 ranking and now getting customers from across Gujarat!"
+                  "Our cloud kitchen now gets direct orders. Saved lakhs in commission fees every month!"
                 </p>
                 <div className="flex items-center gap-4">
                   <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center font-bold text-gray-600">
-                    V
+                    A
                   </div>
                   <div>
-                    <h4 className="font-bold">Vanati</h4>
-                    <p className="text-xs text-muted-foreground">Women's Formal Wear</p>
+                    <h4 className="font-bold">Amit</h4>
+                    <p className="text-xs text-muted-foreground">Cloud Kitchen, Delhi</p>
                   </div>
                 </div>
                 <div className="bg-gray-50 rounded-xl p-4 space-y-2 text-sm">
@@ -534,7 +546,7 @@ export default function RestaurantsCafes() {
                     <span className="text-muted-foreground flex items-center gap-2">
                       <MapPin className="w-4 h-4" /> Location
                     </span>
-                    <span className="font-medium">Ankleshwar, Gujarat</span>
+                    <span className="font-medium">Delhi NCR</span>
                   </div>
                 </div>
               </CardContent>
@@ -543,10 +555,10 @@ export default function RestaurantsCafes() {
           
           <div className="text-center mt-12">
             <a 
-              href="https://id.vyaparify.com/register?utm_source=metagoogle&utm_medium=landing&utm_campaign=retail-local-shops&utm_id=vrpl1225"
+              href="https://id.vyaparify.com/register?utm_source=metagoogle&utm_medium=landing&utm_campaign=restaurants-cafes&utm_id=vrcf1225"
               className="inline-flex items-center gap-2 text-lg font-semibold text-primary hover:text-primary/80 transition-colors"
             >
-              Join 1,50,000+ shops → Create your shop in 2 mins
+              Join 10,000+ restaurants → Start taking orders in 2 mins
               <ArrowRight className="w-5 h-5" />
             </a>
           </div>
@@ -562,7 +574,7 @@ export default function RestaurantsCafes() {
             </div>
             <h2 className="text-4xl font-heading font-bold mb-4">Everything You Need to Succeed Online</h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              From AI-powered websites to Google rankings and lead management - we've got you covered.
+              From direct online ordering to Google visibility and menu management - we've got you covered.
             </p>
           </div>
 
@@ -571,13 +583,13 @@ export default function RestaurantsCafes() {
               <div className="overflow-hidden rounded-2xl mb-6 shadow-lg group-hover:shadow-xl transition-shadow">
                 <img 
                   src={caseStudyAI} 
-                  alt="AI-Powered Website" 
+                  alt="Direct Online Ordering" 
                   className="w-full h-64 object-cover object-top group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
-              <h3 className="text-xl font-bold mb-3">Complete AI-Powered Website</h3>
+              <h3 className="text-xl font-bold mb-3">Direct Online Ordering</h3>
               <p className="text-muted-foreground leading-relaxed">
-                Get access to India's most advanced AI website platform designed specifically for non-technical business owners. Build, customize, and manage your professional talking website that converts visitors into customers 24/7.
+                Your own ordering system — no aggregator dependency. Accept orders directly from customers and keep 100% of your profits.
               </p>
             </div>
 
@@ -585,11 +597,11 @@ export default function RestaurantsCafes() {
               <div className="overflow-hidden rounded-2xl mb-6 shadow-lg group-hover:shadow-xl transition-shadow">
                 <img 
                   src={caseStudyGoogle} 
-                  alt="Google First Page Rankings" 
+                  alt="Google First Page Visibility" 
                   className="w-full h-64 object-cover object-top group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
-              <h3 className="text-xl font-bold mb-3">Google First Page Rankings</h3>
+              <h3 className="text-xl font-bold mb-3">Google First-Page Visibility</h3>
               <p className="text-muted-foreground leading-relaxed">
                 Our SEO optimization ensures your business appears on Google's first page for local searches.
               </p>
@@ -599,13 +611,13 @@ export default function RestaurantsCafes() {
               <div className="overflow-hidden rounded-2xl mb-6 shadow-lg group-hover:shadow-xl transition-shadow">
                 <img 
                   src={caseStudyDashboard} 
-                  alt="Dashboard & Lead Management" 
+                  alt="Menu & Order Management" 
                   className="w-full h-64 object-cover object-top group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
-              <h3 className="text-xl font-bold mb-3">Dashboard & Lead Management</h3>
+              <h3 className="text-xl font-bold mb-3">Menu & Order Management</h3>
               <p className="text-muted-foreground leading-relaxed">
-                Track visitors, manage customer inquiries, and grow your business with our powerful dashboard.
+                Update menu, prices, and availability anytime. Manage all orders from one simple dashboard.
               </p>
             </div>
           </div>
@@ -616,17 +628,17 @@ export default function RestaurantsCafes() {
       <section className="py-24 bg-secondary/30">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-heading font-bold mb-4">Perfect for Your Business</h2>
-            <p className="text-muted-foreground">Tailored for the needs of Indian retail shops.</p>
+            <h2 className="text-3xl font-heading font-bold mb-4">Perfect for Your Food Business</h2>
+            <p className="text-muted-foreground">Tailored for every food format.</p>
           </div>
           
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
             {[
-              { icon: ShoppingBag, label: "Kirana" },
-              { icon:  Smartphone, label: "Electronics" },
-              { icon: Store, label: "Apparel" },
-              { icon: Zap, label: "Pharmacy" },
-              { icon: TrendingUp, label: "Stationery" },
+              { icon: Store, label: "Restaurants" },
+              { icon: Zap, label: "Cafes" },
+              { icon: ShoppingBag, label: "Cloud Kitchens" },
+              { icon: Smartphone, label: "Takeaway & Delivery" },
+              { icon: TrendingUp, label: "Quick Service" },
             ].map((item, i) => (
               <motion.div 
                 key={i}
@@ -649,17 +661,17 @@ export default function RestaurantsCafes() {
           <div className="grid lg:grid-cols-5 gap-8 max-w-6xl mx-auto">
             <div className="lg:col-span-3 bg-slate-900 rounded-3xl p-10 lg:p-12">
               <h2 className="text-3xl lg:text-4xl font-heading font-bold text-white mb-4 leading-tight">
-                Start Free — Get Your Shop Online in Minutes
+                Start Free — Take Your Restaurant Online in Minutes
               </h2>
               <p className="text-slate-400 mb-8">
-                Join thousands of shop owners growing their business with Vyaparify.
+                Build your own ordering system and keep more profit from every order.
               </p>
               
               <div className="space-y-4 mb-8">
                 {[
-                  "Complete AI-Powered Website",
-                  "Higher Google Rankings",
-                  "Run Offers & Share eGreetings",
+                  "No commissions",
+                  "No technical setup",
+                  "Full control over customers",
                 ].map((feature, i) => (
                   <div key={i} className="flex items-center gap-3">
                     <div className="w-6 h-6 rounded-full border-2 border-primary flex items-center justify-center">
@@ -686,11 +698,11 @@ export default function RestaurantsCafes() {
             <div className="lg:col-span-2 bg-white rounded-3xl p-8 lg:p-10 shadow-xl border border-border flex flex-col justify-center relative">
               <div className="absolute -top-3 left-1/2 -translate-x-1/2">
                 <span className="bg-gradient-to-r from-red-500 to-orange-500 text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-lg">
-                  New Year Offer 20% OFF
+                  Special Offer for Restaurants
                 </span>
               </div>
               <p className="text-sm text-center text-muted-foreground mb-4 leading-relaxed mt-2">
-                No commissions. No revenue sharing. One-time investment, Most shop owners recover the cost from their first few online orders.
+                Direct online ordering. Google visibility. Customer data ownership. Keep 100% of your profits.
               </p>
               <p className="text-muted-foreground text-center mb-2">Annual Access</p>
               <div className="text-center mb-2">
@@ -721,7 +733,7 @@ export default function RestaurantsCafes() {
               <img src={logo} alt="Vyaparify" className="h-8 w-auto" />
             </div>
             <p className="text-muted-foreground max-w-md">
-              All-in-one AI Powered Platform for eCommerce, Marketing, Engagement & Payments
+              All-in-one platform for online ordering, local visibility & customer engagement for food businesses.
             </p>
           </div>
           
