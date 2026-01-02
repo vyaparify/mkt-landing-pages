@@ -20,6 +20,41 @@ export async function registerRoutes(
     });
   }
 
+  const zohoWebhookUrl = process.env.ZOHO_FLOW_WEBHOOK_URL;
+
+  async function sendToZohoFlow(leadData: { fullName: string; email: string; phone: string; source: string; amount: number; status: string }) {
+    if (!zohoWebhookUrl) {
+      console.log("Zoho Flow webhook URL not configured, skipping");
+      return;
+    }
+
+    try {
+      const response = await fetch(zohoWebhookUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: leadData.fullName,
+          email: leadData.email,
+          phone: leadData.phone,
+          source: leadData.source,
+          amount: leadData.amount,
+          status: leadData.status,
+          timestamp: new Date().toISOString(),
+        }),
+      });
+
+      if (!response.ok) {
+        console.error("Zoho Flow webhook error:", response.status, await response.text());
+      } else {
+        console.log("Lead sent to Zoho Flow successfully");
+      }
+    } catch (error) {
+      console.error("Failed to send lead to Zoho Flow:", error);
+    }
+  }
+
   app.post("/api/leads/create", async (req, res) => {
     try {
       const { fullName, email, phone, source } = req.body;
@@ -29,6 +64,16 @@ export async function registerRoutes(
       }
       
       const lead = await storage.createLead({
+        fullName,
+        email,
+        phone,
+        source: source || "unknown",
+        amount: 7999,
+        status: "initiated",
+      });
+
+      // Send to Zoho Flow webhook (non-blocking)
+      sendToZohoFlow({
         fullName,
         email,
         phone,
