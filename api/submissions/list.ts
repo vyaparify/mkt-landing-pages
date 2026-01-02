@@ -1,16 +1,5 @@
-import type { IncomingMessage, ServerResponse } from 'http';
-import { neon } from '@neondatabase/serverless';
-
-interface VercelRequest extends IncomingMessage {
-  body: any;
-  query: Record<string, string | string[]>;
-  headers: any;
-}
-
-interface VercelResponse extends ServerResponse {
-  status: (code: number) => VercelResponse;
-  json: (data: any) => void;
-}
+import type { VercelRequest, VercelResponse } from '@vercel/node';
+import pg from 'pg';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'GET') {
@@ -33,18 +22,22 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(500).json({ error: 'Database not configured' });
   }
 
+  const client = new pg.Client({ connectionString: databaseUrl, ssl: { rejectUnauthorized: false } });
+
   try {
-    const sql = neon(databaseUrl);
-    const submissions = await sql`
+    await client.connect();
+    const result = await client.query(`
       SELECT id, full_name, email, phone, amount, razorpay_order_id, razorpay_payment_id, status, created_at
       FROM payment_submissions
       ORDER BY created_at DESC
       LIMIT 100
-    `;
+    `);
+    await client.end();
 
-    res.status(200).json({ submissions });
+    res.status(200).json({ submissions: result.rows });
   } catch (error) {
     console.error("Error fetching submissions:", error);
+    await client.end().catch(() => {});
     res.status(500).json({ error: "Failed to fetch submissions" });
   }
 }

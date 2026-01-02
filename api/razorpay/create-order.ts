@@ -1,30 +1,5 @@
-import type { IncomingMessage, ServerResponse } from 'http';
+import type { VercelRequest, VercelResponse } from '@vercel/node';
 import Razorpay from "razorpay";
-
-interface VercelRequest extends IncomingMessage {
-  body: any;
-  query: Record<string, string | string[]>;
-}
-
-interface VercelResponse extends ServerResponse {
-  status: (code: number) => VercelResponse;
-  json: (data: any) => void;
-}
-
-async function parseBody(req: IncomingMessage): Promise<any> {
-  return new Promise((resolve, reject) => {
-    let body = '';
-    req.on('data', (chunk) => { body += chunk; });
-    req.on('end', () => {
-      try {
-        resolve(body ? JSON.parse(body) : {});
-      } catch (e) {
-        reject(e);
-      }
-    });
-    req.on('error', reject);
-  });
-}
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {
@@ -39,36 +14,28 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-    const body = req.body || await parseBody(req);
     const razorpay = new Razorpay({
       key_id: razorpayKeyId,
       key_secret: razorpayKeySecret,
     });
 
-    const { amount, customerInfo } = body;
+    const { amount, customerInfo } = req.body;
 
     const options = {
       amount: amount * 100,
       currency: "INR",
-      receipt: `vyaparify_${Date.now()}`,
+      receipt: `receipt_${Date.now()}`,
       notes: {
-        customerName: customerInfo?.fullName || customerInfo?.name || '',
-        customerEmail: customerInfo?.email || '',
-        customerPhone: customerInfo?.phone || '',
-        plan: "Vyaparify Premium Annual",
+        customer_name: customerInfo?.name || "",
+        customer_email: customerInfo?.email || "",
+        customer_phone: customerInfo?.phone || "",
       },
     };
 
     const order = await razorpay.orders.create(options);
-
-    res.status(200).json({
-      id: order.id,
-      amount: order.amount,
-      currency: order.currency,
-      keyId: razorpayKeyId,
-    });
+    res.status(200).json({ orderId: order.id, keyId: razorpayKeyId });
   } catch (error) {
     console.error("Razorpay order creation error:", error);
-    res.status(500).json({ error: "Failed to create order" });
+    res.status(500).json({ error: "Failed to create payment order" });
   }
 }
