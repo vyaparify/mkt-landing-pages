@@ -138,20 +138,20 @@ export default function RetailLocalShops() {
                 No technical knowledge needed. Your AI Website. capture orders from nearby customers and grow your business today.
               </motion.p>
               
-              <motion.div variants={fadeIn} className="flex flex-col sm:flex-row gap-4">
+              <motion.div variants={fadeIn} className="flex flex-col sm:flex-row gap-4 items-start">
                 <a href="https://id.vyaparify.com/register?utm_source=metagoogle&utm_medium=landing&utm_campaign=retail-local-shops&utm_id=vrpl1225">
-                  <Button size="lg" className="h-14 px-8 text-lg rounded-full bg-primary hover:bg-primary/90 shadow-xl shadow-primary/25">
+                  <Button size="lg" className="h-16 px-10 text-xl font-bold rounded-full bg-primary hover:bg-primary/90 shadow-2xl shadow-primary/30 transform hover:scale-105 transition-all duration-200">
                     Create Shop in 2 Mins
-                    <ArrowRight className="ml-2 w-5 h-5" />
+                    <ArrowRight className="ml-2 w-6 h-6" />
                   </Button>
                 </a>
                 <Button 
                   size="lg" 
-                  variant="outline" 
-                  className="h-14 px-8 text-lg rounded-full border-2 hover:bg-secondary/50"
+                  variant="ghost" 
+                  className="h-12 px-6 text-base rounded-full border border-muted-foreground/30 text-muted-foreground hover:text-foreground hover:border-foreground/50 hover:bg-transparent"
                   onClick={openCalendly}
                 >
-                  <Calendar className="mr-2 w-5 h-5 text-green-600" />
+                  <Calendar className="mr-2 w-4 h-4" />
                   Book a Demo
                 </Button>
               </motion.div>
