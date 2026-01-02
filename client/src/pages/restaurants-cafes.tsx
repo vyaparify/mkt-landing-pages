@@ -540,6 +540,16 @@ export default function RestaurantsCafes() {
               </CardContent>
             </Card>
           </div>
+          
+          <div className="text-center mt-12">
+            <a 
+              href="https://id.vyaparify.com/register?utm_source=metagoogle&utm_medium=landing&utm_campaign=retail-local-shops&utm_id=vrpl1225"
+              className="inline-flex items-center gap-2 text-lg font-semibold text-primary hover:text-primary/80 transition-colors"
+            >
+              Join 1,50,000+ shops → Create your shop in 2 mins
+              <ArrowRight className="w-5 h-5" />
+            </a>
+          </div>
         </div>
       </section>
 
