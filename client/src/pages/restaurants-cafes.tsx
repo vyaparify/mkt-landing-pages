@@ -6,7 +6,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { useEffect } from "react";
 
 // Assets
-import heroImage from "@assets/generated_images/indian_shop_owner_businessman_using_smartphone.png";
+import heroImage from "@assets/generated_images/indian_restaurant_owner_chef.png";
 import mapImage from "@assets/generated_images/local_business_visibility_3d_illustration.png";
 import dashboardImage from "@assets/screencapture-id-vyaparify-admin-beta-dashboard-2025-12-11-14__1767084671886.png";
 import logo from "@assets/logo.svg";
