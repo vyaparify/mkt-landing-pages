@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Check, MapPin, MessageCircle, Phone, Smartphone, Store, TrendingUp, Zap, Calendar, Star, X, Clock, Scissors, Wrench, Briefcase, Heart, Dumbbell } from "lucide-react";
+import { ArrowRight, Check, MapPin, MessageCircle, Phone, Smartphone, Store, TrendingUp, Zap, Calendar, Star, Clock, Scissors, Wrench, Briefcase, Heart, Dumbbell } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 import heroImage from "@assets/generated_images/indian_shop_owner_businessman_using_smartphone.png";
 import mapImage from "@assets/generated_images/local_business_visibility_3d_illustration.png";
@@ -41,7 +41,6 @@ declare global {
 }
 
 export default function ServiceBasedLocalBusinesses() {
-  const [showBanner, setShowBanner] = useState(true);
 
   useEffect(() => {
     const script = document.createElement('script');
@@ -73,24 +72,6 @@ export default function ServiceBasedLocalBusinesses() {
   return (
     <div className="min-h-screen bg-background font-sans overflow-x-hidden">
       <div className="fixed top-0 left-0 right-0 z-50 flex flex-col">
-        {showBanner && (
-          <div className="bg-orange-600 text-white px-4 py-2 text-center text-sm font-medium flex items-center justify-center gap-2 relative">
-            <span className="flex items-center gap-2 flex-wrap justify-center">
-              <span>🎉 Limited Time Offer: Get <span className="font-bold text-yellow-300">20% OFF</span> your subscription when you start today!</span>
-              <a href="/checkout" className="underline font-bold hover:text-yellow-300 whitespace-nowrap">
-                Buy Now
-              </a>
-            </span>
-            <Button 
-              variant="ghost" 
-              size="icon" 
-              className="h-6 w-6 ml-2 text-white/80 hover:text-white hover:bg-white/20 rounded-full"
-              onClick={() => setShowBanner(false)}
-            >
-              <X className="h-3 w-3" />
-            </Button>
-          </div>
-        )}
 
         <nav className="bg-background/80 backdrop-blur-md border-b border-border/40 w-full">
           <div className="container mx-auto px-4 h-16 flex items-center justify-between">
@@ -681,8 +662,8 @@ export default function ServiceBasedLocalBusinesses() {
             
             <div className="lg:col-span-2 bg-white rounded-3xl p-8 lg:p-10 shadow-xl border border-border flex flex-col justify-center relative">
               <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                <span className="bg-gradient-to-r from-red-500 to-orange-500 text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-lg">
-                  Special Offer for Service Businesses
+                <span className="bg-gradient-to-r from-primary to-orange-500 text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-lg">
+                  Best Value for Service Businesses
                 </span>
               </div>
               <p className="text-sm text-center text-muted-foreground mb-4 leading-relaxed mt-2">
@@ -690,8 +671,7 @@ export default function ServiceBasedLocalBusinesses() {
               </p>
               <p className="text-muted-foreground text-center mb-2">Annual Access</p>
               <div className="text-center mb-2">
-                <span className="text-2xl text-muted-foreground line-through mr-2">₹7,999</span>
-                <span className="text-5xl lg:text-6xl font-bold text-primary">₹6,399</span>
+                <span className="text-5xl lg:text-6xl font-bold text-primary">₹7,999</span>
               </div>
                             
               <a href="/checkout" className="block">

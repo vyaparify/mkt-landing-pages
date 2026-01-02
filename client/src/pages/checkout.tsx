@@ -31,17 +31,14 @@ const planFeatures = [
   "Free Vyaparify Domain & Hosting Included",
 ];
 
-const originalPrice = 7999;
-const discountPercent = 20;
-const discountAmount = Math.round(originalPrice * discountPercent / 100);
-const discountedPrice = originalPrice - discountAmount;
+const price = 7999;
 
 export default function Checkout() {
   const { toast } = useToast();
   const [isProcessing, setIsProcessing] = useState(false);
 
   useEffect(() => {
-    trackViewContent('Checkout Page', discountedPrice);
+    trackViewContent('Checkout Page', price);
   }, []);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -69,7 +66,7 @@ export default function Checkout() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsProcessing(true);
-    trackInitiateCheckout(discountedPrice);
+    trackInitiateCheckout(price);
 
     try {
       const scriptLoaded = await loadRazorpayScript();
@@ -81,7 +78,7 @@ export default function Checkout() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          amount: discountedPrice,
+          amount: price,
           customerInfo: values,
         }),
       });
@@ -100,7 +97,7 @@ export default function Checkout() {
           fullName: values.fullName,
           email: values.email,
           phone: values.phone,
-          amount: discountedPrice,
+          amount: price,
           razorpayOrderId: order.orderId,
           razorpayPaymentId: null,
           status: "initiated",
@@ -142,13 +139,13 @@ export default function Checkout() {
                   fullName: values.fullName,
                   email: values.email,
                   phone: values.phone,
-                  amount: discountedPrice,
+                  amount: price,
                   razorpayOrderId: response.razorpay_order_id,
                   razorpayPaymentId: response.razorpay_payment_id,
                   status: "success",
                 }),
               });
-              window.location.href = `/thankyou?txn=${response.razorpay_payment_id}&amount=${discountedPrice.toLocaleString()}`;
+              window.location.href = `/thankyou?txn=${response.razorpay_payment_id}&amount=${price.toLocaleString()}`;
             } else {
               await fetch("/api/submissions/create", {
                 method: "POST",
@@ -157,7 +154,7 @@ export default function Checkout() {
                   fullName: values.fullName,
                   email: values.email,
                   phone: values.phone,
-                  amount: discountedPrice,
+                  amount: price,
                   razorpayOrderId: response.razorpay_order_id,
                   razorpayPaymentId: response.razorpay_payment_id,
                   status: "failed",
@@ -173,7 +170,7 @@ export default function Checkout() {
                 fullName: values.fullName,
                 email: values.email,
                 phone: values.phone,
-                amount: discountedPrice,
+                amount: price,
                 razorpayOrderId: response.razorpay_order_id,
                 razorpayPaymentId: response.razorpay_payment_id,
                 status: "error",
@@ -192,7 +189,7 @@ export default function Checkout() {
                 fullName: values.fullName,
                 email: values.email,
                 phone: values.phone,
-                amount: discountedPrice,
+                amount: price,
                 razorpayOrderId: order.orderId,
                 razorpayPaymentId: null,
                 status: "cancelled",
@@ -254,8 +251,7 @@ export default function Checkout() {
                     <p className="text-muted-foreground">Annual Subscription Plan</p>
                   </div>
                   <div className="text-right">
-                    <p className="text-muted-foreground line-through">₹{originalPrice.toLocaleString()}</p>
-                    <p className="text-3xl font-bold text-primary">₹{discountedPrice.toLocaleString()}</p>
+                    <p className="text-3xl font-bold text-primary">₹{price.toLocaleString()}</p>
                   </div>
                 </div>
 
@@ -282,13 +278,13 @@ export default function Checkout() {
                 <div className="pt-6 border-t">
                   <div className="flex justify-between items-center">
                     <span className="text-xl font-bold">Total Amount</span>
-                    <span className="text-3xl font-bold text-primary">₹{discountedPrice.toLocaleString()}</span>
+                    <span className="text-3xl font-bold text-primary">₹{price.toLocaleString()}</span>
                   </div>
                 </div>
               </CardContent>
               <CardFooter className="bg-gradient-to-r from-orange-100 to-yellow-100 p-4">
                 <p className="w-full text-center font-bold text-orange-800">
-                  🎉 YOU ARE SAVING {discountPercent}% (₹{discountAmount.toLocaleString()}) TODAY!
+                  🎉 Get started with Vyaparify Premium today!
                 </p>
               </CardFooter>
             </Card>
@@ -381,7 +377,7 @@ export default function Checkout() {
                           Processing...
                         </>
                       ) : (
-                        <>Pay ₹{discountedPrice.toLocaleString()} Securely</>
+                        <>Pay ₹{price.toLocaleString()} Securely</>
                       )}
                     </Button>
                     
