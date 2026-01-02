@@ -86,13 +86,28 @@ export default function Checkout() {
 
       const order = await response.json();
 
+      // Save submission immediately when order is created (status: initiated)
+      await fetch("/api/submissions/create", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fullName: values.fullName,
+          email: values.email,
+          phone: values.phone,
+          amount: discountedPrice,
+          razorpayOrderId: order.orderId,
+          razorpayPaymentId: null,
+          status: "initiated",
+        }),
+      });
+
       const options = {
         key: order.keyId,
         amount: order.amount,
         currency: order.currency,
         name: "Vyaparify",
         description: "Vyaparify Premium - Annual Subscription",
-        order_id: order.id,
+        order_id: order.orderId,
         prefill: {
           name: values.fullName,
           email: values.email,
@@ -145,12 +160,38 @@ export default function Checkout() {
               window.location.href = `/payment-failed?order=${response.razorpay_order_id}&error=verification_failed`;
             }
           } catch (error) {
+            await fetch("/api/submissions/create", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                fullName: values.fullName,
+                email: values.email,
+                phone: values.phone,
+                amount: discountedPrice,
+                razorpayOrderId: response.razorpay_order_id,
+                razorpayPaymentId: response.razorpay_payment_id,
+                status: "error",
+              }),
+            });
             window.location.href = `/payment-failed?order=${response.razorpay_order_id}&error=verification_error`;
           }
           setIsProcessing(false);
         },
         modal: {
-          ondismiss: function () {
+          ondismiss: async function () {
+            await fetch("/api/submissions/create", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                fullName: values.fullName,
+                email: values.email,
+                phone: values.phone,
+                amount: discountedPrice,
+                razorpayOrderId: order.orderId,
+                razorpayPaymentId: null,
+                status: "cancelled",
+              }),
+            });
             setIsProcessing(false);
             window.location.href = `/payment-failed?error=cancelled`;
           },
