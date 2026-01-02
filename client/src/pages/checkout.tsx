@@ -114,8 +114,34 @@ export default function Checkout() {
             });
 
             if (verifyRes.ok) {
+              await fetch("/api/submissions/create", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  fullName: values.fullName,
+                  email: values.email,
+                  phone: values.phone,
+                  amount: discountedPrice,
+                  razorpayOrderId: response.razorpay_order_id,
+                  razorpayPaymentId: response.razorpay_payment_id,
+                  status: "success",
+                }),
+              });
               window.location.href = `/thankyou?txn=${response.razorpay_payment_id}&amount=${discountedPrice.toLocaleString()}`;
             } else {
+              await fetch("/api/submissions/create", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  fullName: values.fullName,
+                  email: values.email,
+                  phone: values.phone,
+                  amount: discountedPrice,
+                  razorpayOrderId: response.razorpay_order_id,
+                  razorpayPaymentId: response.razorpay_payment_id,
+                  status: "failed",
+                }),
+              });
               window.location.href = `/payment-failed?order=${response.razorpay_order_id}&error=verification_failed`;
             }
           } catch (error) {

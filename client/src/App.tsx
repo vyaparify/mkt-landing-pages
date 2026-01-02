@@ -10,6 +10,8 @@ import RestaurantsCafes from "@/pages/restaurants-cafes";
 import Checkout from "@/pages/checkout";
 import ThankYou from "@/pages/thankyou";
 import PaymentFailed from "@/pages/payment-failed";
+import AdminLogin from "@/pages/admin-login";
+import Admin from "@/pages/admin";
 
 function Router() {
   return (
@@ -20,6 +22,8 @@ function Router() {
       <Route path="/checkout" component={Checkout} />
       <Route path="/thankyou" component={ThankYou} />
       <Route path="/payment-failed" component={PaymentFailed} />
+      <Route path="/admin-login" component={AdminLogin} />
+      <Route path="/admin" component={Admin} />
       <Route component={NotFound} />
     </Switch>
   );
