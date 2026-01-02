@@ -9,6 +9,7 @@ import RetailLocalShops from "@/pages/retail-local-shops";
 import RestaurantsCafes from "@/pages/restaurants-cafes";
 import ServiceBasedLocalBusinesses from "@/pages/service-based-local-businesses";
 import HealthcareWellness from "@/pages/healthcare-wellness";
+import RealEstate from "@/pages/real-estate";
 import Checkout from "@/pages/checkout";
 import ThankYou from "@/pages/thankyou";
 import PaymentFailed from "@/pages/payment-failed";
@@ -23,6 +24,7 @@ function Router() {
       <Route path="/restaurants-cafes" component={RestaurantsCafes} />
       <Route path="/service-based-local-businesses" component={ServiceBasedLocalBusinesses} />
       <Route path="/healthcare-wellness" component={HealthcareWellness} />
+      <Route path="/real-estate" component={RealEstate} />
       <Route path="/checkout" component={Checkout} />
       <Route path="/thankyou" component={ThankYou} />
       <Route path="/payment-failed" component={PaymentFailed} />
