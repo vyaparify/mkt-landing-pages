@@ -391,6 +391,13 @@ export default function RetailLocalShops() {
                   </div>
                 </div>
               </div>
+              
+              <a href="https://id.vyaparify.com/register?utm_source=metagoogle&utm_medium=landing&utm_campaign=retail-local-shops&utm_id=vrpl1225" className="inline-block mt-8">
+                <Button size="lg" className="h-14 px-8 text-lg font-bold rounded-full bg-primary hover:bg-primary/90 shadow-xl shadow-primary/25">
+                  Create Shop in 2 Mins
+                  <ArrowRight className="ml-2 w-5 h-5" />
+                </Button>
+              </a>
             </div>
 
             <div className="relative">
