@@ -27,7 +27,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
     await client.connect();
     const result = await client.query(`
-      SELECT id, full_name, email, phone, amount, razorpay_order_id, razorpay_payment_id, status, created_at
+      SELECT id, full_name as "fullName", email, phone, amount, razorpay_order_id as "razorpayOrderId", razorpay_payment_id as "razorpayPaymentId", status, source, created_at as "createdAt"
       FROM payment_submissions
       ORDER BY created_at DESC
       LIMIT 100

@@ -14,7 +14,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const client = new pg.Client({ connectionString: databaseUrl, ssl: { rejectUnauthorized: false } });
 
   try {
-    const { fullName, email, phone, amount, razorpayOrderId, razorpayPaymentId, status } = req.body;
+    const { fullName, email, phone, amount, razorpayOrderId, razorpayPaymentId, status, source } = req.body;
     
     if (!fullName || !email || !phone || !amount) {
       return res.status(400).json({ error: 'Missing required fields' });
@@ -22,10 +22,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     await client.connect();
     const result = await client.query(
-      `INSERT INTO payment_submissions (full_name, email, phone, amount, razorpay_order_id, razorpay_payment_id, status)
-       VALUES ($1, $2, $3, $4, $5, $6, $7)
+      `INSERT INTO payment_submissions (full_name, email, phone, amount, razorpay_order_id, razorpay_payment_id, status, source)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
        RETURNING id`,
-      [fullName, email, phone, amount, razorpayOrderId || null, razorpayPaymentId || null, status || 'pending']
+      [fullName, email, phone, amount, razorpayOrderId || null, razorpayPaymentId || null, status || 'pending', source || 'unknown']
     );
     await client.end();
 
