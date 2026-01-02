@@ -20,6 +20,33 @@ export async function registerRoutes(
     });
   }
 
+  const googleSheetUrl = process.env.GOOGLE_SHEET_WEBHOOK_URL;
+
+  async function sendToGoogleSheet(data: { fullName: string; email: string; phone: string; source: string; amount: number; status: string }) {
+    if (!googleSheetUrl) {
+      console.log("Google Sheet webhook URL not configured, skipping...");
+      return;
+    }
+    
+    try {
+      const formData = new URLSearchParams();
+      formData.append("Name", data.fullName);
+      formData.append("Email", data.email);
+      formData.append("Phone", data.phone);
+      formData.append("Source", data.source);
+      formData.append("Amount", data.amount.toString());
+      formData.append("Status", data.status);
+      
+      await fetch(googleSheetUrl, {
+        method: "POST",
+        body: formData,
+      });
+      console.log("Lead sent to Google Sheet successfully");
+    } catch (error) {
+      console.error("Failed to send to Google Sheet:", error);
+    }
+  }
+
   app.post("/api/leads/create", async (req, res) => {
     try {
       const { fullName, email, phone, source } = req.body;
@@ -29,6 +56,16 @@ export async function registerRoutes(
       }
       
       const lead = await storage.createLead({
+        fullName,
+        email,
+        phone,
+        source: source || "unknown",
+        amount: 7999,
+        status: "initiated",
+      });
+      
+      // Send to Google Sheet in background
+      sendToGoogleSheet({
         fullName,
         email,
         phone,
