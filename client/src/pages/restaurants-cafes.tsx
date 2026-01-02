@@ -3,7 +3,8 @@ import { ArrowRight, Check, MapPin, MessageCircle, ShoppingBag, Smartphone, Stor
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { LeadCaptureModal } from "@/components/LeadCaptureModal";
 
 // Assets
 import heroImage from "@assets/generated_images/indian_restaurant_owner_chef.png";
@@ -43,6 +44,7 @@ declare global {
 }
 
 export default function RestaurantsCafes() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const script = document.createElement('script');
@@ -689,12 +691,14 @@ export default function RestaurantsCafes() {
                 <span className="text-5xl lg:text-6xl font-bold text-primary">₹7,999</span>
               </div>
                             
-              <a href="/checkout" className="block">
-                <Button className="w-full h-14 text-lg font-bold rounded-xl bg-primary hover:bg-primary/90 shadow-lg">
-                  GET STARTED
-                  <ArrowRight className="ml-2 w-5 h-5" />
-                </Button>
-              </a>
+              <Button 
+                onClick={() => setIsModalOpen(true)}
+                data-testid="button-get-started"
+                className="w-full h-14 text-lg font-bold rounded-xl bg-primary hover:bg-primary/90 shadow-lg"
+              >
+                GET STARTED
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </Button>
               
               <p className="text-center text-muted-foreground text-sm mt-6">
                 No contracts, no hidden fees, cancel anytime
@@ -703,6 +707,12 @@ export default function RestaurantsCafes() {
           </div>
         </div>
       </section>
+
+      <LeadCaptureModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+        source="restaurants-cafes"
+      />
 
       {/* Footer */}
       <footer className="bg-white border-t border-border pt-16 pb-8">
