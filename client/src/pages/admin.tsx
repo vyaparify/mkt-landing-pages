@@ -9,14 +9,15 @@ import logo from "@assets/logo.svg";
 
 interface Submission {
   id: string;
-  full_name: string;
+  fullName: string;
   email: string;
   phone: string;
   amount: number;
-  razorpay_order_id: string | null;
-  razorpay_payment_id: string | null;
+  razorpayOrderId: string | null;
+  razorpayPaymentId: string | null;
   status: string;
-  created_at: string;
+  source: string | null;
+  createdAt: string;
 }
 
 export default function Admin() {
@@ -163,6 +164,7 @@ export default function Admin() {
                         <TableHead>Name</TableHead>
                         <TableHead>Email</TableHead>
                         <TableHead>Phone</TableHead>
+                        <TableHead>Source</TableHead>
                         <TableHead>Amount</TableHead>
                         <TableHead>Status</TableHead>
                         <TableHead>Date</TableHead>
@@ -171,12 +173,17 @@ export default function Admin() {
                     <TableBody>
                       {submissions.map((submission) => (
                         <TableRow key={submission.id}>
-                          <TableCell className="font-medium">{submission.full_name}</TableCell>
+                          <TableCell className="font-medium">{submission.fullName}</TableCell>
                           <TableCell>{submission.email}</TableCell>
                           <TableCell>{submission.phone}</TableCell>
+                          <TableCell>
+                            <Badge variant="outline" className="text-xs">
+                              {submission.source || 'unknown'}
+                            </Badge>
+                          </TableCell>
                           <TableCell>₹{submission.amount.toLocaleString()}</TableCell>
                           <TableCell>{getStatusBadge(submission.status)}</TableCell>
-                          <TableCell>{new Date(submission.created_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' })}</TableCell>
+                          <TableCell>{new Date(submission.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' })}</TableCell>
                         </TableRow>
                       ))}
                     </TableBody>

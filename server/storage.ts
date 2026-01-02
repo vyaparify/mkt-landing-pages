@@ -16,6 +16,7 @@ export interface IStorage {
   createUser(user: InsertUser): Promise<User>;
   createLead(lead: CreateLeadInput): Promise<PaymentSubmission>;
   updateLeadStatus(id: string, status: string, razorpayOrderId?: string, razorpayPaymentId?: string): Promise<void>;
+  getAllLeads(): Promise<PaymentSubmission[]>;
 }
 
 export class MemStorage implements IStorage {
@@ -70,6 +71,12 @@ export class MemStorage implements IStorage {
       if (razorpayPaymentId) lead.razorpayPaymentId = razorpayPaymentId;
       this.leads.set(id, lead);
     }
+  }
+
+  async getAllLeads(): Promise<PaymentSubmission[]> {
+    return Array.from(this.leads.values()).sort((a, b) => 
+      new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    );
   }
 }
 

@@ -103,5 +103,62 @@ export async function registerRoutes(
     }
   });
 
+  // Admin endpoints
+  const adminPassword = process.env.ADMIN_PASSWORD;
+
+  app.get("/api/submissions/list", async (req, res) => {
+    try {
+      const password = req.headers["x-admin-password"];
+      
+      if (!adminPassword || password !== adminPassword) {
+        return res.status(401).json({ error: "Unauthorized" });
+      }
+      
+      const submissions = await storage.getAllLeads();
+      res.json({ submissions });
+    } catch (error) {
+      console.error("Error fetching submissions:", error);
+      res.status(500).json({ error: "Failed to fetch submissions" });
+    }
+  });
+
+  app.post("/api/submissions/create", async (req, res) => {
+    try {
+      const { fullName, email, phone, amount, status, source, razorpayOrderId, razorpayPaymentId } = req.body;
+      
+      const lead = await storage.createLead({
+        fullName,
+        email,
+        phone,
+        source: source || "checkout",
+        amount: amount || 7999,
+        status: status || "pending",
+      });
+      
+      if (razorpayOrderId || razorpayPaymentId) {
+        await storage.updateLeadStatus(lead.id, status, razorpayOrderId, razorpayPaymentId);
+      }
+      
+      res.json(lead);
+    } catch (error) {
+      console.error("Submission creation error:", error);
+      res.status(500).json({ error: "Failed to create submission" });
+    }
+  });
+
+  app.post("/api/admin/verify", async (req, res) => {
+    const { password } = req.body;
+    
+    if (!adminPassword) {
+      return res.status(500).json({ error: "Admin password not configured" });
+    }
+    
+    if (password === adminPassword) {
+      res.json({ verified: true });
+    } else {
+      res.status(401).json({ verified: false });
+    }
+  });
+
   return httpServer;
 }
