@@ -11,6 +11,7 @@ import ServiceBasedLocalBusinesses from "@/pages/service-based-local-businesses"
 import HealthcareWellness from "@/pages/healthcare-wellness";
 import RealEstate from "@/pages/real-estate";
 import EducationCoaching from "@/pages/education-coaching";
+import EcommerceD2C from "@/pages/ecommerce-d2c";
 import Checkout from "@/pages/checkout";
 import ThankYou from "@/pages/thankyou";
 import PaymentFailed from "@/pages/payment-failed";
@@ -27,6 +28,7 @@ function Router() {
       <Route path="/healthcare-wellness" component={HealthcareWellness} />
       <Route path="/real-estate" component={RealEstate} />
       <Route path="/education-coaching" component={EducationCoaching} />
+      <Route path="/ecommerce-d2c" component={EcommerceD2C} />
       <Route path="/checkout" component={Checkout} />
       <Route path="/thankyou" component={ThankYou} />
       <Route path="/payment-failed" component={PaymentFailed} />
