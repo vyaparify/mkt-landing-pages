@@ -1,0 +1,54 @@
+14:26:21.246 Running build in Washington, D.C., USA (East) – iad1
+14:26:21.246 Build machine configuration: 4 cores, 8 GB
+14:26:21.256 Cloning github.com/vyaparify/mkt-landing-pages (Branch: main, Commit: cfa22c9)
+14:26:21.257 Skipping build cache, deployment was triggered without cache.
+14:26:21.902 Cloning completed: 646.000ms
+14:26:22.271 Running "vercel build"
+14:26:23.036 Vercel CLI 50.1.3
+14:26:23.749 Installing dependencies...
+14:26:27.100 npm warn deprecated @esbuild-kit/esm-loader@2.6.5: Merged into tsx: https://tsx.is
+14:26:27.161 npm warn deprecated @esbuild-kit/core-utils@3.3.2: Merged into tsx: https://tsx.is
+14:26:33.243 
+14:26:33.244 added 454 packages in 9s
+14:26:33.244 
+14:26:33.244 43 packages are looking for funding
+14:26:33.244   run `npm fund` for details
+14:26:33.747 [36mvite v7.1.12 [32mbuilding for production...[36m[39m
+14:26:33.833 transforming...
+14:26:37.102 [32m✓[39m 2209 modules transformed.
+14:26:37.534 rendering chunks...
+14:26:37.544 [meta-images] no Replit deployment domain found, skipping meta tag updates
+14:26:37.554 computing gzip size...
+14:26:37.579 [2m../dist/public/[22m[32mindex.html                                                                                        [39m[1m[2m    1.67 kB[22m[1m[22m[2m │ gzip:   0.64 kB[22m
+14:26:37.579 [2m../dist/public/[22m[2massets/[22m[32mlogo-BJ2TUISf.svg                                                                          [39m[1m[2m    4.74 kB[22m[1m[22m[2m │ gzip:   1.66 kB[22m
+14:26:37.580 [2m../dist/public/[22m[2massets/[22m[32mScreenshot_2025-12-30_at_6.34.03_PM_1767099854890-CyB-OdAi.png                             [39m[1m[2m  144.85 kB[22m[1m[22m
+14:26:37.580 [2m../dist/public/[22m[2massets/[22m[32mscreencapture-id-vyaparify-admin-beta-dashboard-2025-12-11-14__1767084671886-CBXreJaw.png  [39m[1m[2m  158.89 kB[22m[1m[22m
+14:26:37.580 [2m../dist/public/[22m[2massets/[22m[32mScreenshot_2025-12-30_at_6.33.55_PM_1767099854890-DD6UL6oe.png                             [39m[1m[2m  227.15 kB[22m[1m[22m
+14:26:37.580 [2m../dist/public/[22m[2massets/[22m[32mScreenshot_2025-12-30_at_6.33.47_PM_1767099854878-DY6foHMQ.png                             [39m[1m[2m  620.16 kB[22m[1m[22m
+14:26:37.580 [2m../dist/public/[22m[2massets/[22m[32mlocal_business_visibility_3d_illustration-2yjqnUJ0.png                                     [39m[1m[2m  792.06 kB[22m[1m[22m
+14:26:37.580 [2m../dist/public/[22m[2massets/[22m[32myoung_indian_businessman_headshot-C6EZMLMh.png                                             [39m[1m[2m1,255.63 kB[22m[1m[22m
+14:26:37.580 [2m../dist/public/[22m[2massets/[22m[32mindian_businessman_portrait_headshot-BSr1TFtI.png                                          [39m[1m[2m1,257.29 kB[22m[1m[22m
+14:26:37.580 [2m../dist/public/[22m[2massets/[22m[32mindian_shopkeeper_man_headshot-DucpdO8m.png                                                [39m[1m[2m1,333.19 kB[22m[1m[22m
+14:26:37.581 [2m../dist/public/[22m[2massets/[22m[32mindian_shop_owner_businessman_using_smartphone-Ky8vLha7.png                                [39m[1m[2m1,369.11 kB[22m[1m[22m
+14:26:37.581 [2m../dist/public/[22m[2massets/[22m[32mindian_woman_entrepreneur_headshot-CvpjtnHi.png                                            [39m[1m[2m1,412.11 kB[22m[1m[22m
+14:26:37.581 [2m../dist/public/[22m[2massets/[22m[35mindex-DSFlIynS.css                                                                         [39m[1m[2m  106.88 kB[22m[1m[22m[2m │ gzip:  17.60 kB[22m
+14:26:37.581 [2m../dist/public/[22m[2massets/[22m[36mindex-CrmMY6Qk.js                                                                          [39m[1m[33m  633.08 kB[39m[22m[2m │ gzip: 188.02 kB[22m
+14:26:37.581 [33m
+14:26:37.581 (!) Some chunks are larger than 500 kB after minification. Consider:
+14:26:37.581 - Using dynamic import() to code-split the application
+14:26:37.581 - Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+14:26:37.581 - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.[39m
+14:26:37.582 [32m✓ built in 3.80s[39m
+14:26:37.885 Using TypeScript 5.6.3 (local user-provided)
+14:26:41.218 Using TypeScript 5.6.3 (local user-provided)
+14:26:42.044 Using TypeScript 5.6.3 (local user-provided)
+14:26:42.359 Using TypeScript 5.6.3 (local user-provided)
+14:26:42.628 api/submissions/create.ts(2,22): error TS2307: Cannot find module '@neondatabase/serverless' or its corresponding type declarations.
+14:26:42.628 
+14:26:42.652 Using TypeScript 5.6.3 (local user-provided)
+14:26:42.884 api/submissions/list.ts(2,22): error TS2307: Cannot find module '@neondatabase/serverless' or its corresponding type declarations.
+14:26:42.884 
+14:26:42.953 Build Completed in /vercel/output [19s]
+14:26:43.124 Deploying outputs...
+14:26:48.602 Deployment completed
+14:26:49.583 Creating build cache...
