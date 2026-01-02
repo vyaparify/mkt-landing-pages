@@ -126,6 +126,7 @@ export default function Checkout() {
         modal: {
           ondismiss: function () {
             setIsProcessing(false);
+            window.location.href = `/payment-failed?error=cancelled`;
           },
         },
       };
