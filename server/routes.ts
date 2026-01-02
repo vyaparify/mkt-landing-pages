@@ -20,6 +20,30 @@ export async function registerRoutes(
     });
   }
 
+  app.post("/api/leads/create", async (req, res) => {
+    try {
+      const { fullName, email, phone, source } = req.body;
+      
+      if (!fullName || !email || !phone) {
+        return res.status(400).json({ error: "Name, email, and phone are required" });
+      }
+      
+      const lead = await storage.createLead({
+        fullName,
+        email,
+        phone,
+        source: source || "unknown",
+        amount: 7999,
+        status: "initiated",
+      });
+      
+      res.json(lead);
+    } catch (error) {
+      console.error("Lead creation error:", error);
+      res.status(500).json({ error: "Failed to create lead" });
+    }
+  });
+
   app.post("/api/razorpay/create-order", async (req, res) => {
     try {
       if (!razorpay) {

@@ -26,6 +26,7 @@ export const paymentSubmissions = pgTable("payment_submissions", {
   razorpayOrderId: text("razorpay_order_id"),
   razorpayPaymentId: text("razorpay_payment_id"),
   status: text("status").notNull().default("pending"),
+  source: text("source"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
