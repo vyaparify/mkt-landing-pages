@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -9,6 +9,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { Input } from "@/components/ui/input";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useToast } from "@/hooks/use-toast";
+import { trackViewContent, trackInitiateCheckout } from "@/lib/tracking";
 import logo from "@assets/logo.svg";
 
 declare global {
@@ -39,6 +40,10 @@ export default function Checkout() {
   const { toast } = useToast();
   const [isProcessing, setIsProcessing] = useState(false);
 
+  useEffect(() => {
+    trackViewContent('Checkout Page', discountedPrice);
+  }, []);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -64,6 +69,7 @@ export default function Checkout() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsProcessing(true);
+    trackInitiateCheckout(discountedPrice);
 
     try {
       const scriptLoaded = await loadRazorpayScript();

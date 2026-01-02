@@ -2,16 +2,19 @@ import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Check, Mail, Phone, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { trackPurchase } from "@/lib/tracking";
 import logo from "@assets/logo.svg";
 
 export default function ThankYou() {
-  useEffect(() => {
-    document.title = "Payment Successful | Vyaparify";
-  }, []);
-
   const params = new URLSearchParams(window.location.search);
   const transactionId = params.get("txn") || "";
   const amount = params.get("amount") || "6,399";
+  const numericAmount = parseInt(amount.replace(/,/g, '')) || 6399;
+
+  useEffect(() => {
+    document.title = "Payment Successful | Vyaparify";
+    trackPurchase(numericAmount, transactionId);
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-emerald-50 font-sans">

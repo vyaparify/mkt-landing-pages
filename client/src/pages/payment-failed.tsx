@@ -2,16 +2,18 @@ import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { XCircle, RefreshCw, Phone, Mail, ArrowLeft, AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { trackPaymentFailed } from "@/lib/tracking";
 import logo from "@assets/logo.svg";
 
 export default function PaymentFailed() {
-  useEffect(() => {
-    document.title = "Payment Failed | Vyaparify";
-  }, []);
-
   const params = new URLSearchParams(window.location.search);
   const errorCode = params.get("error") || "";
   const orderId = params.get("order") || "";
+
+  useEffect(() => {
+    document.title = "Payment Failed | Vyaparify";
+    trackPaymentFailed(orderId, errorCode);
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-red-50 via-white to-orange-50 font-sans">
