@@ -100,13 +100,17 @@ export function LeadCaptureModal({ isOpen, onClose, source = "retail-local-shops
       
       const leadData = await leadResponse.json();
       
-      // Track Meta Pixel Lead event on form submission
+      // Track Meta Pixel Lead event on form submission with user data
       if (typeof (window as any).fbq === 'function') {
         (window as any).fbq('track', 'Lead', {
           content_name: 'Vyaparify Premium',
           content_category: source,
           value: 7999,
           currency: 'INR',
+          email: formData.email.toLowerCase().trim(),
+          phone: '+91' + formData.mobile.replace(/\s/g, ''),
+          first_name: formData.name.split(' ')[0]?.toLowerCase().trim(),
+          last_name: formData.name.split(' ').slice(1).join(' ')?.toLowerCase().trim() || '',
         });
       }
       
