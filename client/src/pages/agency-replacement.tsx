@@ -1,5 +1,5 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
+import { useLocation } from "wouter";
 import { 
   ArrowRight, Check, Shield, Zap, Users, TrendingUp, 
   MessageCircle, Star, Calendar, Phone, Mail, Clock,
@@ -7,7 +7,6 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { LeadCaptureModal } from "@/components/LeadCaptureModal";
 import logo from "@assets/logo.svg";
 
 const fadeIn = {
@@ -73,7 +72,11 @@ const successStories = [
 ];
 
 export default function AgencyReplacement() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [, navigate] = useLocation();
+
+  const goToCheckout = () => {
+    navigate("/checkout?source=agency-replacement");
+  };
 
   const openCalendly = () => {
     if ((window as any).Calendly) {
@@ -100,7 +103,7 @@ export default function AgencyReplacement() {
             </Button>
             <Button 
               className="bg-primary hover:bg-primary/90"
-              onClick={() => setIsModalOpen(true)}
+              onClick={goToCheckout}
             >
               Get Started
             </Button>
@@ -141,7 +144,7 @@ export default function AgencyReplacement() {
               <Button 
                 size="lg" 
                 className="h-16 px-10 text-xl font-bold rounded-full bg-primary hover:bg-primary/90 shadow-2xl shadow-primary/30"
-                onClick={() => setIsModalOpen(true)}
+                onClick={goToCheckout}
                 data-testid="button-hero-cta"
               >
                 Buy Now ₹7,999
@@ -225,7 +228,7 @@ export default function AgencyReplacement() {
             <Button 
               size="lg" 
               className="h-14 px-8 text-lg font-bold rounded-full bg-primary hover:bg-primary/90"
-              onClick={() => setIsModalOpen(true)}
+              onClick={goToCheckout}
             >
               GET MY TALKING WEBSITE NOW
               <ArrowRight className="ml-2 w-5 h-5" />
@@ -269,7 +272,7 @@ export default function AgencyReplacement() {
             <Button 
               size="lg" 
               className="h-14 px-8 text-lg font-bold rounded-full bg-primary hover:bg-primary/90"
-              onClick={() => setIsModalOpen(true)}
+              onClick={goToCheckout}
             >
               Buy Now ₹7,999
               <ArrowRight className="ml-2 w-5 h-5" />
@@ -331,7 +334,7 @@ export default function AgencyReplacement() {
                   <p className="text-sm">We offer professional websites, AI chatbots, and Google SEO optimization - all included in our ₹7,999/year plan!</p>
                 </div>
               </div>
-              <Button className="w-full" onClick={() => setIsModalOpen(true)}>
+              <Button className="w-full" onClick={goToCheckout}>
                 Try Live Demo
                 <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
@@ -413,7 +416,7 @@ export default function AgencyReplacement() {
             <Button 
               size="lg" 
               className="h-14 px-8 text-lg font-bold rounded-full bg-primary hover:bg-primary/90"
-              onClick={() => setIsModalOpen(true)}
+              onClick={goToCheckout}
             >
               Get Started on Mobile
               <Smartphone className="ml-2 w-5 h-5" />
@@ -489,7 +492,7 @@ export default function AgencyReplacement() {
             <Button 
               size="lg" 
               className="h-14 px-8 text-lg font-bold rounded-full bg-primary hover:bg-primary/90"
-              onClick={() => setIsModalOpen(true)}
+              onClick={goToCheckout}
             >
               Get Similar Results for ₹7,999
               <ArrowRight className="ml-2 w-5 h-5" />
@@ -510,7 +513,7 @@ export default function AgencyReplacement() {
           <Button 
             size="lg" 
             className="h-16 px-10 text-xl font-bold rounded-full bg-primary hover:bg-primary/90 shadow-2xl"
-            onClick={() => setIsModalOpen(true)}
+            onClick={goToCheckout}
           >
             Get Started Now - ₹7,999
             <ArrowRight className="ml-2 w-6 h-6" />
@@ -549,11 +552,6 @@ export default function AgencyReplacement() {
         </div>
       </footer>
 
-      <LeadCaptureModal 
-        isOpen={isModalOpen} 
-        onClose={() => setIsModalOpen(false)} 
-        source="agency-replacement"
-      />
     </div>
   );
 }
