@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { useLocation } from "wouter";
 import { 
   ArrowRight, Check, Shield, Zap, Users, TrendingUp, 
-  MessageCircle, Star, Calendar, Phone, Mail, Clock,
+  MessageCircle, Star, Phone, Mail, Clock,
   Bot, Calculator, X, ChevronRight, Smartphone, Globe
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -78,12 +78,6 @@ export default function AgencyReplacement() {
     navigate("/checkout?source=agency-replacement");
   };
 
-  const openCalendly = () => {
-    if ((window as any).Calendly) {
-      (window as any).Calendly.initPopupWidget({ url: 'https://calendly.com/hello-vyaparify/new-meeting' });
-    }
-  };
-
   return (
     <div className="min-h-screen bg-white font-sans">
       {/* Sticky Header */}
@@ -92,22 +86,12 @@ export default function AgencyReplacement() {
           <a href="/#" className="flex items-center gap-2">
             <img src={logo} alt="Vyaparify" className="h-8 w-auto" />
           </a>
-          <div className="flex items-center gap-4">
-            <Button 
-              variant="ghost" 
-              className="hidden md:flex"
-              onClick={openCalendly}
-            >
-              <Calendar className="mr-2 w-4 h-4" />
-              Book Demo
-            </Button>
-            <Button 
+          <Button 
               className="bg-primary hover:bg-primary/90"
               onClick={goToCheckout}
             >
               Get Started
             </Button>
-          </div>
         </div>
       </header>
 
@@ -488,7 +472,7 @@ export default function AgencyReplacement() {
           </div>
 
           <div className="text-center mt-12">
-            <p className="text-muted-foreground mb-6">Transformation Timeline: 30-45 Days</p>
+            <p className="text-muted-foreground mb-6">Transformation Timeline: 10-12 Weeks</p>
             <Button 
               size="lg" 
               className="h-14 px-8 text-lg font-bold rounded-full bg-primary hover:bg-primary/90"
