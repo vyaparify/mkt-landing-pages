@@ -25,10 +25,16 @@ const formSchema = z.object({
 });
 
 const planFeatures = [
-  "AI Talking Website (24/7 Sales)",
-  "Higher Google Rankings",
-  "Complete Lead Management Dashboard",
-  "Free Vyaparify Domain & Hosting Included",
+  "Professional Business Website",
+  "AI-Powered Chatbot Integration",
+  "Google Top SEO Setup",
+  "Lead Capture Form",
+  "WhatsApp Integration",
+  "Mobile-Responsive Design",
+  "SSL Security Certificate",
+  "24/7 Technical Support",
+  "Free Vyaparify Domain & Hosting",
+  "Regular Updates & Maintenance",
 ];
 
 const price = 7999;
