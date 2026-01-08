@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { ShoppingCart, Check, Shield, Zap, Users, Award, ArrowLeft, ArrowRight, Lock } from "lucide-react";
+import { ShoppingCart, Check, Shield, Zap, Users, Award, ArrowLeft, ArrowRight } from "lucide-react";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { trackViewContent } from "@/lib/tracking";
@@ -173,9 +173,17 @@ export default function Checkout() {
               </Button>
 
               <div className="flex items-center justify-center gap-2 text-muted-foreground text-sm">
-                <Lock className="w-4 h-4" />
-                <span>Your information is secure and encrypted</span>
+                <Shield className="w-4 h-4" />
+                <span>Secured by Razorpay • 100% Safe Payment</span>
               </div>
+
+              <p className="text-center text-xs text-muted-foreground pt-2">
+                By proceeding, you agree to our{" "}
+                <a href="https://id.vyaparify.com/terms-conditions" target="_blank" rel="noopener noreferrer" className="underline hover:text-primary">Terms</a>
+                {" "}and{" "}
+                <a href="https://id.vyaparify.com/privacy-policy" target="_blank" rel="noopener noreferrer" className="underline hover:text-primary">Privacy Policy</a>.
+                {" "}Your payment is processed securely through Razorpay.
+              </p>
             </div>
           </motion.div>
         </div>
