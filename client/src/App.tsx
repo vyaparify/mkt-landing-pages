@@ -17,6 +17,7 @@ import ThankYou from "@/pages/thankyou";
 import PaymentFailed from "@/pages/payment-failed";
 import AdminLogin from "@/pages/admin-login";
 import Admin from "@/pages/admin";
+import AgencyReplacement from "@/pages/agency-replacement";
 
 function Router() {
   return (
@@ -34,6 +35,7 @@ function Router() {
       <Route path="/payment-failed" component={PaymentFailed} />
       <Route path="/admin-login" component={AdminLogin} />
       <Route path="/admin" component={Admin} />
+      <Route path="/agency-replacement" component={AgencyReplacement} />
       <Route component={NotFound} />
     </Switch>
   );
