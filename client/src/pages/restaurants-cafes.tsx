@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { useEffect } from "react";
 import { useLocation } from "wouter";
+import { trackPageView } from "@/lib/tracking";
 
 // Assets
 import heroImage from "@assets/generated_images/indian_restaurant_owner_chef.png";
@@ -49,6 +50,10 @@ export default function RestaurantsCafes() {
   const goToCheckout = () => {
     navigate("/checkout?source=restaurants-cafes");
   };
+
+  useEffect(() => {
+    trackPageView("restaurants-cafes");
+  }, []);
 
   useEffect(() => {
     const script = document.createElement('script');

@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useEffect } from "react";
 import { useLocation } from "wouter";
+import { trackPageView } from "@/lib/tracking";
 
 import heroImage from "@assets/generated_images/indian_doctor_healthcare_practitioner.png";
 import mapImage from "@assets/generated_images/local_business_visibility_3d_illustration.png";
@@ -47,6 +48,10 @@ export default function HealthcareWellness() {
   const goToCheckout = () => {
     navigate("/checkout?source=healthcare-wellness");
   };
+
+  useEffect(() => {
+    trackPageView("healthcare-wellness");
+  }, []);
 
   useEffect(() => {
     const script = document.createElement('script');

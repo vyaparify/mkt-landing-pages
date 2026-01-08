@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { useLocation } from "wouter";
 import { 
@@ -7,6 +8,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { trackPageView } from "@/lib/tracking";
 import logo from "@assets/logo.svg";
 
 const fadeIn = {
@@ -73,6 +75,10 @@ const successStories = [
 
 export default function AgencyReplacement() {
   const [, navigate] = useLocation();
+
+  useEffect(() => {
+    trackPageView("agency-replacement");
+  }, []);
 
   const goToCheckout = () => {
     navigate("/checkout?source=agency-replacement");

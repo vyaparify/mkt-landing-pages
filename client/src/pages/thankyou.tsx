@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Check, Mail, Phone, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { trackPurchase } from "@/lib/tracking";
+import { trackPurchase, trackPageView } from "@/lib/tracking";
 import logo from "@assets/logo.svg";
 
 export default function ThankYou() {
@@ -13,6 +13,7 @@ export default function ThankYou() {
 
   useEffect(() => {
     document.title = "Payment Successful | Vyaparify";
+    trackPageView('thankyou');
     trackPurchase(numericAmount, transactionId);
   }, []);
 

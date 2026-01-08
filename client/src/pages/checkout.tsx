@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { ShoppingCart, Check, Shield, Zap, Users, ArrowLeft, ArrowRight, Loader2 } from "lucide-react";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { trackViewContent, trackInitiateCheckout } from "@/lib/tracking";
+import { trackViewContent, trackInitiateCheckout, trackPageView } from "@/lib/tracking";
 import logo from "@assets/logo.svg";
 
 declare global {
@@ -31,6 +31,7 @@ export default function Checkout() {
   const [isProcessing, setIsProcessing] = useState(false);
 
   useEffect(() => {
+    trackPageView('checkout');
     trackViewContent('Checkout Page', price);
   }, []);
 

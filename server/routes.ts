@@ -4,6 +4,11 @@ import { storage } from "./storage";
 import Razorpay from "razorpay";
 import crypto from "crypto";
 
+// Hash data for Meta Conversion API (SHA-256)
+function hashData(data: string): string {
+  return crypto.createHash("sha256").update(data).digest("hex");
+}
+
 export async function registerRoutes(
   httpServer: Server,
   app: Express
@@ -202,6 +207,79 @@ export async function registerRoutes(
       res.json({ verified: true });
     } else {
       res.status(401).json({ verified: false });
+    }
+  });
+
+  // Meta Conversion API endpoint
+  const metaPixelId = process.env.META_PIXEL_ID;
+  const metaAccessToken = process.env.META_ACCESS_TOKEN;
+
+  app.post("/api/meta/conversion", async (req, res) => {
+    try {
+      if (!metaPixelId || !metaAccessToken) {
+        console.log("Meta Conversion API not configured");
+        return res.json({ success: false, message: "Meta API not configured" });
+      }
+
+      const { eventName, eventTime, userData, customData, eventSourceUrl, actionSource } = req.body;
+
+      if (!eventName) {
+        return res.status(400).json({ error: "Event name is required" });
+      }
+
+      const eventData = {
+        event_name: eventName,
+        event_time: eventTime || Math.floor(Date.now() / 1000),
+        event_source_url: eventSourceUrl || "",
+        action_source: actionSource || "website",
+        user_data: {
+          em: userData?.email ? hashData(userData.email.toLowerCase().trim()) : undefined,
+          ph: userData?.phone ? hashData(userData.phone.replace(/[^0-9]/g, "")) : undefined,
+          fn: userData?.firstName ? hashData(userData.firstName.toLowerCase().trim()) : undefined,
+          ln: userData?.lastName ? hashData(userData.lastName.toLowerCase().trim()) : undefined,
+          client_ip_address: req.ip || req.headers["x-forwarded-for"] || "",
+          client_user_agent: req.headers["user-agent"] || "",
+          fbc: userData?.fbc || undefined,
+          fbp: userData?.fbp || undefined,
+        },
+        custom_data: customData || {},
+      };
+
+      // Remove undefined values from user_data
+      Object.keys(eventData.user_data).forEach(key => {
+        if (eventData.user_data[key as keyof typeof eventData.user_data] === undefined) {
+          delete eventData.user_data[key as keyof typeof eventData.user_data];
+        }
+      });
+
+      const payload = {
+        data: [eventData],
+        access_token: metaAccessToken,
+      };
+
+      const response = await fetch(
+        `https://graph.facebook.com/v18.0/${metaPixelId}/events`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        }
+      );
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        console.error("Meta Conversion API error:", result);
+        return res.status(response.status).json({ error: "Meta API error", details: result });
+      }
+
+      console.log("Meta Conversion API success:", result);
+      res.json({ success: true, result });
+    } catch (error) {
+      console.error("Meta Conversion API error:", error);
+      res.status(500).json({ error: "Failed to send event to Meta" });
     }
   });
 

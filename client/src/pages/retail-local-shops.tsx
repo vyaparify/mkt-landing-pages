@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { useEffect } from "react";
 import { useLocation } from "wouter";
+import { trackPageView } from "@/lib/tracking";
 
 // Assets
 import heroImage from "@assets/generated_images/indian_retail_shop_owner_smartphone.png";
@@ -49,6 +50,10 @@ export default function RetailLocalShops() {
   const goToCheckout = () => {
     navigate("/checkout?source=retail-local-shops");
   };
+
+  useEffect(() => {
+    trackPageView("retail-local-shops");
+  }, []);
 
   useEffect(() => {
     const script = document.createElement('script');
