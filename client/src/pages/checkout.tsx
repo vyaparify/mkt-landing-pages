@@ -1,8 +1,10 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { ShoppingCart, Check, Shield, Zap, Users, Award, ArrowLeft } from "lucide-react";
+import { ShoppingCart, Check, Shield, Zap, Users, Award, ArrowLeft, ArrowRight, Lock } from "lucide-react";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { trackViewContent } from "@/lib/tracking";
+import { LeadCaptureModal } from "@/components/LeadCaptureModal";
 import logo from "@assets/logo.svg";
 
 const planFeatures = [
@@ -21,6 +23,8 @@ const planFeatures = [
 const price = 7999;
 
 export default function Checkout() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   useEffect(() => {
     trackViewContent('Checkout Page', price);
   }, []);
@@ -106,7 +110,7 @@ export default function Checkout() {
                   <Users className="w-5 h-5 text-green-600" />
                 </div>
                 <div>
-                  <p className="font-bold text-green-900">29 people viewing this offer</p>
+                  <p className="font-bold text-green-900">30 people viewing this offer</p>
                   <p className="text-green-700 text-sm">Join 247+ businesses that chose Vyaparify this month</p>
                 </div>
               </div>
@@ -149,16 +153,39 @@ export default function Checkout() {
               </div>
             </div>
 
-            {/* Trust Footer */}
-            <div className="text-center pt-4">
-              <p className="text-xs text-muted-foreground">
-                By proceeding, you agree to our Terms of Service and Privacy Policy.
-                Your payment is processed securely through Razorpay.
-              </p>
+            {/* Total Amount & Payment */}
+            <div className="bg-white border border-gray-200 rounded-xl p-5 space-y-4">
+              <div className="flex justify-between items-center">
+                <div>
+                  <p className="font-bold text-lg">Total Amount (Inclusive of all taxes):</p>
+                  <p className="text-muted-foreground text-sm">No hidden charges • GST included</p>
+                </div>
+                <p className="text-3xl font-bold text-primary">₹{price.toLocaleString()}</p>
+              </div>
+
+              <Button 
+                onClick={() => setIsModalOpen(true)}
+                className="w-full h-14 text-lg font-bold bg-primary hover:bg-primary/90 shadow-lg shadow-primary/25 rounded-xl"
+                data-testid="button-buy-now"
+              >
+                Buy Now ₹{price.toLocaleString()}
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </Button>
+
+              <div className="flex items-center justify-center gap-2 text-muted-foreground text-sm">
+                <Lock className="w-4 h-4" />
+                <span>Your information is secure and encrypted</span>
+              </div>
             </div>
           </motion.div>
         </div>
       </main>
+
+      <LeadCaptureModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+        source="checkout"
+      />
     </div>
   );
 }
