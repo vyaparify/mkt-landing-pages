@@ -1,28 +1,9 @@
-import { useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
+import { useEffect } from "react";
 import { motion } from "framer-motion";
-import { Loader2, Lock, ShieldCheck, ShoppingCart, Info, ArrowLeft, Check } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { ShoppingCart, Check, Shield, Zap, Users, Award, ArrowLeft } from "lucide-react";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { useToast } from "@/hooks/use-toast";
-import { trackViewContent, trackInitiateCheckout } from "@/lib/tracking";
+import { trackViewContent } from "@/lib/tracking";
 import logo from "@assets/logo.svg";
-
-declare global {
-  interface Window {
-    Razorpay: any;
-  }
-}
-
-const formSchema = z.object({
-  fullName: z.string().min(2, "Name must be at least 2 characters"),
-  email: z.string().email("Invalid email address"),
-  phone: z.string().min(10, "Phone number must be at least 10 digits"),
-});
 
 const planFeatures = [
   "Professional Business Website",
@@ -40,184 +21,9 @@ const planFeatures = [
 const price = 7999;
 
 export default function Checkout() {
-  const { toast } = useToast();
-  const [isProcessing, setIsProcessing] = useState(false);
-
   useEffect(() => {
     trackViewContent('Checkout Page', price);
   }, []);
-
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      fullName: "",
-      email: "",
-      phone: "",
-    },
-  });
-
-  const loadRazorpayScript = (): Promise<boolean> => {
-    return new Promise((resolve) => {
-      if (window.Razorpay) {
-        resolve(true);
-        return;
-      }
-      const script = document.createElement("script");
-      script.src = "https://checkout.razorpay.com/v1/checkout.js";
-      script.onload = () => resolve(true);
-      script.onerror = () => resolve(false);
-      document.body.appendChild(script);
-    });
-  };
-
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    setIsProcessing(true);
-    trackInitiateCheckout(price);
-
-    try {
-      const scriptLoaded = await loadRazorpayScript();
-      if (!scriptLoaded) {
-        throw new Error("Failed to load payment gateway");
-      }
-
-      const response = await fetch("/api/razorpay/create-order", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          amount: price,
-          customerInfo: values,
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to create order");
-      }
-
-      const order = await response.json();
-
-      // Save submission immediately when order is created (status: initiated)
-      await fetch("/api/submissions/create", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          fullName: values.fullName,
-          email: values.email,
-          phone: values.phone,
-          amount: price,
-          razorpayOrderId: order.orderId,
-          razorpayPaymentId: null,
-          status: "initiated",
-        }),
-      });
-
-      const options = {
-        key: order.keyId,
-        amount: order.amount,
-        currency: order.currency,
-        name: "Vyaparify",
-        description: "Vyaparify Premium - Annual Subscription",
-        order_id: order.orderId,
-        prefill: {
-          name: values.fullName,
-          email: values.email,
-          contact: values.phone,
-        },
-        theme: {
-          color: "#F97316",
-        },
-        handler: async function (response: any) {
-          try {
-            const verifyRes = await fetch("/api/razorpay/verify-payment", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                razorpay_order_id: response.razorpay_order_id,
-                razorpay_payment_id: response.razorpay_payment_id,
-                razorpay_signature: response.razorpay_signature,
-              }),
-            });
-
-            if (verifyRes.ok) {
-              await fetch("/api/submissions/create", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                  fullName: values.fullName,
-                  email: values.email,
-                  phone: values.phone,
-                  amount: price,
-                  razorpayOrderId: response.razorpay_order_id,
-                  razorpayPaymentId: response.razorpay_payment_id,
-                  status: "success",
-                }),
-              });
-              window.location.href = `/thankyou?txn=${response.razorpay_payment_id}&amount=${price.toLocaleString()}`;
-            } else {
-              await fetch("/api/submissions/create", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                  fullName: values.fullName,
-                  email: values.email,
-                  phone: values.phone,
-                  amount: price,
-                  razorpayOrderId: response.razorpay_order_id,
-                  razorpayPaymentId: response.razorpay_payment_id,
-                  status: "failed",
-                }),
-              });
-              window.location.href = `/payment-failed?order=${response.razorpay_order_id}&error=verification_failed`;
-            }
-          } catch (error) {
-            await fetch("/api/submissions/create", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                fullName: values.fullName,
-                email: values.email,
-                phone: values.phone,
-                amount: price,
-                razorpayOrderId: response.razorpay_order_id,
-                razorpayPaymentId: response.razorpay_payment_id,
-                status: "error",
-              }),
-            });
-            window.location.href = `/payment-failed?order=${response.razorpay_order_id}&error=verification_error`;
-          }
-          setIsProcessing(false);
-        },
-        modal: {
-          ondismiss: async function () {
-            await fetch("/api/submissions/create", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                fullName: values.fullName,
-                email: values.email,
-                phone: values.phone,
-                amount: price,
-                razorpayOrderId: order.orderId,
-                razorpayPaymentId: null,
-                status: "cancelled",
-              }),
-            });
-            setIsProcessing(false);
-            window.location.href = `/payment-failed?error=cancelled`;
-          },
-        },
-      };
-
-      const razorpay = new window.Razorpay(options);
-      razorpay.open();
-    } catch (error) {
-      toast({
-        title: "Payment failed",
-        description: "Something went wrong. Please try again.",
-        variant: "destructive",
-      });
-      setIsProcessing(false);
-    }
-  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-orange-50 font-sans">
@@ -272,15 +78,6 @@ export default function Checkout() {
                   ))}
                 </div>
 
-                <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
-                  <div className="flex gap-3">
-                    <Info className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
-                    <p className="text-blue-800 text-sm">
-                      Your subscription will automatically activate immediately after payment. You'll receive login details via email/SMS.
-                    </p>
-                  </div>
-                </div>
-
                 <div className="pt-6 border-t">
                   <div className="flex justify-between items-center">
                     <span className="text-xl font-bold">Total Amount</span>
@@ -290,7 +87,7 @@ export default function Checkout() {
               </CardContent>
               <CardFooter className="bg-gradient-to-r from-orange-100 to-yellow-100 p-4">
                 <p className="w-full text-center font-bold text-orange-800">
-                  🎉 Get started with Vyaparify Premium today!
+                  Get started with Vyaparify Premium today!
                 </p>
               </CardFooter>
             </Card>
@@ -300,106 +97,65 @@ export default function Checkout() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="order-1 lg:order-2"
+            className="order-1 lg:order-2 space-y-4"
           >
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Lock className="w-5 h-5 text-primary" />
-                  Your Details
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <Form {...form}>
-                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                    <FormField
-                      control={form.control}
-                      name="fullName"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Full Name *</FormLabel>
-                          <FormControl>
-                            <Input 
-                              placeholder="Enter your name" 
-                              {...field} 
-                              className="h-12"
-                              data-testid="input-name"
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    
-                    <FormField
-                      control={form.control}
-                      name="email"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Email Address *</FormLabel>
-                          <FormControl>
-                            <Input 
-                              placeholder="Enter your email" 
-                              type="email"
-                              {...field} 
-                              className="h-12"
-                              data-testid="input-email"
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    
-                    <FormField
-                      control={form.control}
-                      name="phone"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Phone Number *</FormLabel>
-                          <FormControl>
-                            <Input 
-                              placeholder="Enter your phone number" 
-                              type="tel"
-                              {...field} 
-                              className="h-12"
-                              data-testid="input-phone"
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
+            {/* Social Proof Banner */}
+            <div className="bg-green-50 border border-green-200 rounded-xl p-4">
+              <div className="flex items-start gap-3">
+                <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center shrink-0">
+                  <Users className="w-5 h-5 text-green-600" />
+                </div>
+                <div>
+                  <p className="font-bold text-green-900">29 people viewing this offer</p>
+                  <p className="text-green-700 text-sm">Join 247+ businesses that chose Vyaparify this month</p>
+                </div>
+              </div>
+            </div>
 
-                    <Button 
-                      type="submit" 
-                      className="w-full h-14 text-lg font-bold bg-primary hover:bg-primary/90 shadow-lg shadow-primary/25 rounded-xl" 
-                      disabled={isProcessing}
-                      data-testid="button-pay-now"
-                    >
-                      {isProcessing ? (
-                        <>
-                          <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                          Processing...
-                        </>
-                      ) : (
-                        <>Pay ₹{price.toLocaleString()} Securely</>
-                      )}
-                    </Button>
-                    
-                    <div className="flex items-center justify-center gap-2 text-muted-foreground text-sm">
-                      <ShieldCheck className="w-4 h-4" />
-                      <span>Secured by Razorpay • 100% Safe Payment</span>
-                    </div>
+            {/* Security & Speed Badges */}
+            <div className="grid grid-cols-2 gap-4">
+              <div className="bg-gray-50 border border-gray-200 rounded-xl p-4 text-center">
+                <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                  <Shield className="w-5 h-5 text-gray-600" />
+                </div>
+                <p className="font-bold text-gray-900">Bank-Grade Security</p>
+                <p className="text-gray-600 text-sm">SSL Encrypted Payment</p>
+              </div>
+              <div className="bg-purple-50 border border-purple-200 rounded-xl p-4 text-center">
+                <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                  <Zap className="w-5 h-5 text-purple-600" />
+                </div>
+                <p className="font-bold text-purple-900">Instant Activation</p>
+                <p className="text-purple-600 text-sm">Website live in 24hrs</p>
+              </div>
+            </div>
 
-                    <p className="text-center text-xs text-muted-foreground pt-4 border-t">
-                      By proceeding, you agree to our Terms of Service and Privacy Policy. 
-                      Your payment is processed securely through Razorpay.
-                    </p>
-                  </form>
-                </Form>
-              </CardContent>
-            </Card>
+            {/* Professional Service Guarantee */}
+            <div className="bg-green-50 border border-green-200 rounded-xl p-4">
+              <p className="font-bold text-green-900 text-center text-lg">Professional Service Guarantee</p>
+              <p className="text-green-700 text-sm text-center mt-1">24/7 support, and proven AI technology for your success</p>
+            </div>
+
+            {/* Technical Guarantee */}
+            <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
+              <div className="flex items-start gap-3">
+                <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center shrink-0">
+                  <Award className="w-5 h-5 text-blue-600" />
+                </div>
+                <div>
+                  <p className="font-bold text-blue-900">3-Month Technical Guarantee</p>
+                  <p className="text-blue-700 text-sm">100% refund for technical failures</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Trust Footer */}
+            <div className="text-center pt-4">
+              <p className="text-xs text-muted-foreground">
+                By proceeding, you agree to our Terms of Service and Privacy Policy.
+                Your payment is processed securely through Razorpay.
+              </p>
+            </div>
           </motion.div>
         </div>
       </main>
