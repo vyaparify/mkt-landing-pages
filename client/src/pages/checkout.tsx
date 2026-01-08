@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { ShoppingCart, Check, Shield, Zap, Users, Award, ArrowLeft, ArrowRight, Loader2 } from "lucide-react";
+import { ShoppingCart, Check, Shield, Zap, Users, ArrowLeft, ArrowRight, Loader2 } from "lucide-react";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { trackViewContent, trackInitiateCheckout } from "@/lib/tracking";
@@ -251,20 +251,7 @@ export default function Checkout() {
             {/* Professional Service Guarantee */}
             <div className="bg-green-50 border border-green-200 rounded-xl p-4">
               <p className="font-bold text-green-900 text-center text-lg">Professional Service Guarantee</p>
-              <p className="text-green-700 text-sm text-center mt-1">24/7 support, and proven AI technology for your success</p>
-            </div>
-
-            {/* Technical Guarantee */}
-            <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
-              <div className="flex items-start gap-3">
-                <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center shrink-0">
-                  <Award className="w-5 h-5 text-blue-600" />
-                </div>
-                <div>
-                  <p className="font-bold text-blue-900">3-Month Technical Guarantee</p>
-                  <p className="text-blue-700 text-sm">100% refund for technical failures</p>
-                </div>
-              </div>
+              <p className="text-green-700 text-sm text-center mt-1">Premium support, and proven AI technology for your success</p>
             </div>
 
             {/* Total Amount & Payment */}
