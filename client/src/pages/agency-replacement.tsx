@@ -89,7 +89,7 @@ export default function AgencyReplacement() {
       {/* Sticky Header */}
       <header className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-b border-border z-50">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          <a href="/" className="flex items-center gap-2">
+          <a href="/#" className="flex items-center gap-2">
             <img src={logo} alt="Vyaparify" className="h-8 w-auto" />
           </a>
           <div className="flex items-center gap-4">
