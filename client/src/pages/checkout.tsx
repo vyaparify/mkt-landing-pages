@@ -1,11 +1,16 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { ShoppingCart, Check, Shield, Zap, Users, Award, ArrowLeft, ArrowRight } from "lucide-react";
+import { ShoppingCart, Check, Shield, Zap, Users, Award, ArrowLeft, ArrowRight, Loader2 } from "lucide-react";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { trackViewContent } from "@/lib/tracking";
-import { LeadCaptureModal } from "@/components/LeadCaptureModal";
+import { trackViewContent, trackInitiateCheckout } from "@/lib/tracking";
 import logo from "@assets/logo.svg";
+
+declare global {
+  interface Window {
+    Razorpay: any;
+  }
+}
 
 const planFeatures = [
   "Professional Business Website",
@@ -23,11 +28,120 @@ const planFeatures = [
 const price = 7999;
 
 export default function Checkout() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
 
   useEffect(() => {
     trackViewContent('Checkout Page', price);
   }, []);
+
+  const loadRazorpayScript = (): Promise<boolean> => {
+    return new Promise((resolve) => {
+      if (window.Razorpay) {
+        resolve(true);
+        return;
+      }
+      const script = document.createElement("script");
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
+      document.body.appendChild(script);
+    });
+  };
+
+  const handlePayNow = async () => {
+    setIsProcessing(true);
+    trackInitiateCheckout(price);
+
+    try {
+      const scriptLoaded = await loadRazorpayScript();
+      if (!scriptLoaded) {
+        throw new Error("Failed to load payment gateway");
+      }
+
+      const response = await fetch("/api/razorpay/create-order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          amount: price,
+          customerInfo: {},
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to create order");
+      }
+
+      const order = await response.json();
+
+      const options = {
+        key: order.keyId,
+        amount: order.amount,
+        currency: order.currency || "INR",
+        name: "Vyaparify",
+        description: "Vyaparify Premium - Annual Subscription",
+        order_id: order.orderId,
+        theme: {
+          color: "#F97316",
+        },
+        handler: async function (response: any) {
+          try {
+            const verifyRes = await fetch("/api/razorpay/verify-payment", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                razorpay_order_id: response.razorpay_order_id,
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_signature: response.razorpay_signature,
+              }),
+            });
+
+            if (verifyRes.ok) {
+              // Track Meta Pixel Purchase event
+              if (typeof (window as any).fbq === 'function') {
+                (window as any).fbq('track', 'Purchase', {
+                  value: price,
+                  currency: 'INR',
+                  content_name: 'Vyaparify Premium',
+                });
+              }
+
+              await fetch("/api/submissions/create", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  fullName: "Checkout User",
+                  email: "checkout@vyaparify.com",
+                  phone: "0000000000",
+                  amount: price,
+                  razorpayOrderId: response.razorpay_order_id,
+                  razorpayPaymentId: response.razorpay_payment_id,
+                  status: "success",
+                  source: "checkout",
+                }),
+              });
+              window.location.href = `/thankyou?txn=${response.razorpay_payment_id}&amount=${price.toLocaleString()}`;
+            } else {
+              window.location.href = `/payment-failed?order=${response.razorpay_order_id}&error=verification_failed`;
+            }
+          } catch (error) {
+            window.location.href = `/payment-failed?order=${response.razorpay_order_id}&error=verification_error`;
+          }
+          setIsProcessing(false);
+        },
+        modal: {
+          ondismiss: function () {
+            setIsProcessing(false);
+          },
+        },
+      };
+
+      const razorpay = new window.Razorpay(options);
+      razorpay.open();
+    } catch (error) {
+      alert("Something went wrong. Please try again.");
+      setIsProcessing(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-orange-50 font-sans">
@@ -164,12 +278,22 @@ export default function Checkout() {
               </div>
 
               <Button 
-                onClick={() => setIsModalOpen(true)}
+                onClick={handlePayNow}
+                disabled={isProcessing}
                 className="w-full h-14 text-lg font-bold bg-primary hover:bg-primary/90 shadow-lg shadow-primary/25 rounded-xl"
                 data-testid="button-buy-now"
               >
-                Buy Now ₹{price.toLocaleString()}
-                <ArrowRight className="ml-2 w-5 h-5" />
+                {isProcessing ? (
+                  <>
+                    <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                    Processing...
+                  </>
+                ) : (
+                  <>
+                    Pay ₹{price.toLocaleString()} Securely
+                    <ArrowRight className="ml-2 w-5 h-5" />
+                  </>
+                )}
               </Button>
 
               <div className="flex items-center justify-center gap-2 text-muted-foreground text-sm">
@@ -188,12 +312,6 @@ export default function Checkout() {
           </motion.div>
         </div>
       </main>
-
-      <LeadCaptureModal 
-        isOpen={isModalOpen} 
-        onClose={() => setIsModalOpen(false)} 
-        source="checkout"
-      />
     </div>
   );
 }
