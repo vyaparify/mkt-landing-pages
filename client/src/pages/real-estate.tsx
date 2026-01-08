@@ -2,8 +2,8 @@ import { motion } from "framer-motion";
 import { ArrowRight, Check, MapPin, MessageCircle, Phone, TrendingUp, Zap, Calendar, Star, Clock, Building, Building2, Briefcase, Home, Landmark } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { useEffect, useState } from "react";
-import { LeadCaptureModal } from "@/components/LeadCaptureModal";
+import { useEffect } from "react";
+import { useLocation } from "wouter";
 
 import heroImage from "@assets/generated_images/indian_real_estate_agent.png";
 import mapImage from "@assets/generated_images/local_business_visibility_3d_illustration.png";
@@ -42,7 +42,11 @@ declare global {
 }
 
 export default function RealEstate() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [, navigate] = useLocation();
+
+  const goToCheckout = () => {
+    navigate("/checkout?source=real-estate");
+  };
 
   useEffect(() => {
     const script = document.createElement('script');
@@ -677,7 +681,7 @@ export default function RealEstate() {
               </div>
                             
               <Button 
-                onClick={() => setIsModalOpen(true)}
+                onClick={goToCheckout}
                 data-testid="button-get-started"
                 className="w-full h-14 text-lg font-bold rounded-xl bg-primary hover:bg-primary/90 shadow-lg"
               >
@@ -693,11 +697,6 @@ export default function RealEstate() {
         </div>
       </section>
 
-      <LeadCaptureModal 
-        isOpen={isModalOpen} 
-        onClose={() => setIsModalOpen(false)} 
-        source="real-estate"
-      />
 
       <footer className="bg-white border-t border-border pt-16 pb-8">
         <div className="container mx-auto px-4">

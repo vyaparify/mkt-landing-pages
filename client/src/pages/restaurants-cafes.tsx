@@ -3,8 +3,8 @@ import { ArrowRight, Check, MapPin, MessageCircle, ShoppingBag, Smartphone, Stor
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { useEffect, useState } from "react";
-import { LeadCaptureModal } from "@/components/LeadCaptureModal";
+import { useEffect } from "react";
+import { useLocation } from "wouter";
 
 // Assets
 import heroImage from "@assets/generated_images/indian_restaurant_owner_chef.png";
@@ -44,7 +44,11 @@ declare global {
 }
 
 export default function RestaurantsCafes() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [, navigate] = useLocation();
+
+  const goToCheckout = () => {
+    navigate("/checkout?source=restaurants-cafes");
+  };
 
   useEffect(() => {
     const script = document.createElement('script');
@@ -692,7 +696,7 @@ export default function RestaurantsCafes() {
               </div>
                             
               <Button 
-                onClick={() => setIsModalOpen(true)}
+                onClick={goToCheckout}
                 data-testid="button-get-started"
                 className="w-full h-14 text-lg font-bold rounded-xl bg-primary hover:bg-primary/90 shadow-lg"
               >
@@ -708,11 +712,6 @@ export default function RestaurantsCafes() {
         </div>
       </section>
 
-      <LeadCaptureModal 
-        isOpen={isModalOpen} 
-        onClose={() => setIsModalOpen(false)} 
-        source="restaurants-cafes"
-      />
 
       {/* Footer */}
       <footer className="bg-white border-t border-border pt-16 pb-8">
